@@ -4,6 +4,7 @@ import footer from "../templates/footer.js"
 import home from "../pages/home.js"
 import artwork from "../pages/artwork.js"
 import artist from "../pages/artist.js"
+import cardArtwork from "../components/cardArtwork.js"
 import store from "../pages/store.js"
 import product from "../pages/product.js"
 import favorites from "../pages/favorites.js"
@@ -11,6 +12,8 @@ import search from "../pages/search.js"
 import error from "../pages/error.js"
 import getHash from "../utils/getHash.js"
 import resolveRoutes from "../utils/resolveRoutes.js"
+
+cardArtwork()
 
 const routes = { '': home, 'artwork': artwork, 'artist': artist, 'store': store, 'product': product, 'favorites': favorites, 'search': search }
 
