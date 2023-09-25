@@ -13,9 +13,11 @@ import error from "../pages/error.js"
 import getHash from "../utils/getHash.js"
 import resolveRoutes from "../utils/resolveRoutes.js"
 import cardArtist from "../components/cardArtist.js"
+import cardProduct from "../components/cardProduct.js"
 
 cardArtwork()
 cardArtist()
+cardProduct()
 
 const routes = { '': home, 'artwork': artwork, 'artist': artist, 'store': store, 'product': product, 'favorites': favorites, 'search': search }
 
