@@ -37,7 +37,7 @@ export const router = () => {
     footerElement.innerHTML = ''
     footer(footerElement)
 
-    const hash = getHash()
+    const hash = getHash().page
     const resolve = resolveRoutes(hash)
     const render = routes[resolve] ? routes[resolve] : error
     render(mainElement)

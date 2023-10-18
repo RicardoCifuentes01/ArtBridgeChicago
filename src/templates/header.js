@@ -13,24 +13,29 @@ const header = (headerElement) => {
         listPages.appendChild(item)
     }
 
-    const form = document.createElement('form')
+    const search = document.createElement('section')
 
-    const search = document.createElement('input')
-    search.setAttribute('type', 'text')
-    search.setAttribute('id', 'term')
-    search.setAttribute('name', 'term')
-    search.setAttribute('placeholder', 'Search...')
+    const searchField = document.createElement('input')
+    searchField.setAttribute('type', 'text')
+    searchField.setAttribute('id', 'term')
+    searchField.setAttribute('name', 'term')
+    searchField.setAttribute('placeholder', 'Search...')
 
     const buttonSearch = document.createElement('button')
-    buttonSearch.setAttribute('type', 'submit')
     const searchFigure = document.createElement('figure')
     const searchImg = document.createElement('img')
+    searchImg.setAttribute('alt', 'search')
+    searchImg.setAttribute('title', 'search')
     searchFigure.appendChild(searchImg)
     buttonSearch.appendChild(searchFigure)
 
-    form.append(search, buttonSearch)
+    buttonSearch.addEventListener('click', (event) => {
+        searchField.value != '' && searchField.value != ' ' && searchField.value != '%20' ? location.hash = `#search=${searchField.value}` : event.preventDefault()
+    })
 
-    headerElement.append(listPages, form)
+    search.append(searchField, buttonSearch)
+
+    headerElement.append(listPages, search)
 }
 
 export default header

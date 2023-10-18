@@ -1,5 +1,6 @@
 const getHash = () => {
-    const [hash, term] = location.hash.split('=')
+    const [page, id] = location.hash.split('=')
+    const hash = { page: page, id: id }
     return hash
 }
 

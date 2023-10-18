@@ -1,3 +1,5 @@
+import getHash from "./getHash.js"
+
 const getArtwork = async (id) => {
     try {
         const response = await fetch(`https://api.artic.edu/api/v1/artworks/${id}?fields=image_id,date_display,title,description,technique_titles,material_titles,sound_ids,artist_display`)
@@ -8,4 +10,6 @@ const getArtwork = async (id) => {
     }
 }
 
-export const information = getArtwork(27992) //Test
+export const informationArtwork = async () => {
+    return await getArtwork(getHash().id)
+}

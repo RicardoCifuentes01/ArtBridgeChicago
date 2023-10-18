@@ -1,3 +1,5 @@
+import getHash from "./getHash.js"
+
 const getArtist = async (id) => {
     try {
         const response = await fetch(`https://api.artic.edu/api/v1/agents/${id}?fields=title,is_artist,birth_date,death_date,description`)
@@ -8,4 +10,6 @@ const getArtist = async (id) => {
     }
 }
 
-export const information = getArtist(41188) //Test
+export const informationArtist = async () => {
+    return await getArtist(getHash().id)
+}

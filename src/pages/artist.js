@@ -1,4 +1,4 @@
-import { information } from "../utils/getArtist.js"
+import { informationArtist } from "../utils/getArtist.js"
 
 const artist = async (main) => {
 
@@ -17,7 +17,7 @@ const artist = async (main) => {
         return filteredArtist
     }
 
-    const filteredInformation = await filterArtist(information)
+    const filteredInformation = await filterArtist(informationArtist())
 
     const cardArtist = document.createElement('card-artist')
     cardArtist.title = `${filteredInformation.title}`

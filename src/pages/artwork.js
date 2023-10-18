@@ -1,4 +1,4 @@
-import { information } from "../utils/getArtwork.js"
+import { informationArtwork } from "../utils/getArtwork.js"
 
 const artwork = async (main) => {
 
@@ -29,7 +29,7 @@ const artwork = async (main) => {
         return filteredArtwork
     }
 
-    const filteredInformation = await filterArtwork(information)
+    const filteredInformation = await filterArtwork(informationArtwork())
 
     const cardArtwork = document.createElement('card-artwork')
     cardArtwork.image = `https://www.artic.edu/iiif/2/${filteredInformation.image}/full/256,/0/default.jpg`
