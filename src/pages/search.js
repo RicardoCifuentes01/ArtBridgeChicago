@@ -115,9 +115,6 @@ const search = (main) => {
         const animation = (word) => {
 
             animationSection.innerHTML = ''
-
-            const figure = document.createElement('figure')
-            const img = document.createElement('img')
             figure.appendChild(img)
             img.setAttribute('alt', `${word}`)
             img.setAttribute('title', `${word}`)

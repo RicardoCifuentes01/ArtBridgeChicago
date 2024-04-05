@@ -1,10 +1,12 @@
+import { informationProduct } from "../utils/getProduct.js"
+
 const store = async (main) => {
 
 
     const storeContent = async (presentPage) => {
         const getStore = async () => {
             try {
-                const response = await fetch(`https://api.artic.edu/api/v1/products?fields=image_url,title,max_current_price,description&page=${presentPage}`)
+                const response = await fetch(`https://api.artic.edu/api/v1/products?fields=id,image_url,title,max_current_price,description&page=${presentPage}`)
                 const information = await response.json()
                 return information
             } catch (error) {
@@ -29,6 +31,7 @@ const store = async (main) => {
 
                     const filteredProduct = {}
 
+                    filteredProduct['id'] = product.id
                     product.image_url == null ? filteredProduct['image'] = '' : filteredProduct['image'] = product.image_url
                     product.title == null || product.title == '' ? filterProduct['title'] = 'Untitle' : filteredProduct['title'] = product.title
                     product.max_current_price == null || product.max_current_price == '' ? filteredProduct['price'] = 'Unknown price' : filteredProduct['price'] = product.max_current_price
@@ -57,6 +60,16 @@ const store = async (main) => {
 
                 productDiv.append(titleProduct, descriptionProduct, priceProduct, figureProduct)
                 main.appendChild(productDiv)
+
+                titleProduct.addEventListener('click', () => {
+                    location.hash = `#product=${filteredInformation.id}`
+                    informationProduct(filteredInformation.id)
+                })
+
+                figureProduct.addEventListener('click', () => {
+                    location.hash = `#product=${filteredInformation.id}`
+                    informationProduct(filteredInformation.id)
+                })
             }
         }
 

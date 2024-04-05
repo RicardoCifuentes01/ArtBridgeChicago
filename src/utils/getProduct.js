@@ -1,3 +1,5 @@
+import getHash from "./getHash.js"
+
 const getProduct = async (id) => {
     try {
         const response = await fetch(`https://api.artic.edu/api/v1/products/${id}?fields=image_url,title,max_current_price,web_url,description`)
@@ -8,4 +10,6 @@ const getProduct = async (id) => {
     }
 }
 
-export const information = getProduct(289074) //Test
+export const informationProduct = async () => {
+    return await getProduct(getHash().id)
+}

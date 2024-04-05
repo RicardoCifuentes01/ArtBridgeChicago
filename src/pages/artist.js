@@ -1,4 +1,5 @@
 import { informationArtist } from "../utils/getArtist.js"
+import { informationArtwork } from "../utils/getArtwork.js"
 
 const artist = async (main) => {
 
@@ -34,7 +35,7 @@ const artist = async (main) => {
 
         const term = title.replace(' ', '%20')
 
-        const response = await fetch(`https://api.artic.edu/api/v1/artworks/search?q=${term}&fields=image_id,title,date_display,artist_title&page=${presentPage}`)
+        const response = await fetch(`https://api.artic.edu/api/v1/artworks/search?q=${term}&fields=id,image_id,title,date_display,artist_title&page=${presentPage}`)
         const information = await response.json()
 
         for (const artwork of information.data) {
@@ -67,6 +68,11 @@ const artist = async (main) => {
 
                 artworkDiv.append(artworkFigure, artworkDate, artworkTitle)
                 artworksArtistSection.appendChild(artworkDiv)
+
+                artworkDiv.addEventListener('click', () => {
+                    location.hash = `#artwork=${artwork.id}`
+                    informationArtwork(artwork.id)
+                })
             }
 
         }

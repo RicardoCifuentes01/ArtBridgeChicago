@@ -36,9 +36,9 @@ const artwork = async (main) => {
     cardArtwork.year = `${filteredInformation.year}`
     cardArtwork.title = `${filteredInformation.title}`
     cardArtwork.description = `${filteredInformation.description}`
-    cardArtwork.techniques = `${filteredInformation.techniques}`
-    cardArtwork.materials = `${filteredInformation.materials}`
-    cardArtwork.sound = `${filteredInformation.sound}`
+    cardArtwork.techniques = `${filteredInformation.techniques}`.replace(/,/g, ', ')
+    cardArtwork.materials = `${filteredInformation.materials}`.replace(/,/g, ', ')
+    cardArtwork.sound = filteredInformation.sound
     cardArtwork.author = `${filteredInformation.author}`
 
     main.appendChild(cardArtwork)

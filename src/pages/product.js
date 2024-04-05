@@ -1,4 +1,4 @@
-import { information } from "../utils/getProduct.js"
+import { informationProduct } from "../utils/getProduct.js"
 
 const product = async (main) => {
     const filterProduct = async (information) => {
@@ -17,7 +17,7 @@ const product = async (main) => {
         return filteredProduct
     }
 
-    const filteredInformation = await filterProduct(information)
+    const filteredInformation = await filterProduct(informationProduct())
 
     const cardProduct = document.createElement('card-product')
     cardProduct.image = `${filteredInformation.image}`
