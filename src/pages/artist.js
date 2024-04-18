@@ -1,5 +1,7 @@
 import { informationArtist } from "../utils/getArtist.js"
-import { informationArtwork } from "../utils/getArtwork.js"
+import saveFavorites from "../utils/saveFavorites.js"
+import getHash from "../utils/getHash.js"
+import deleteFavorites from "../utils/deleteFavorites.js"
 
 const artist = async (main) => {
 
@@ -71,7 +73,6 @@ const artist = async (main) => {
 
                 artworkDiv.addEventListener('click', () => {
                     location.hash = `#artwork=${artwork.id}`
-                    informationArtwork(artwork.id)
                 })
             }
 
@@ -173,6 +174,24 @@ const artist = async (main) => {
     artworksArtistSectionContent(filteredInformation.title, 1)
 
     main.append(cardArtist, artworksArtistSection, artworksArtistNavSection)
+
+    const buttonLike = cardArtist.children[2]
+
+    if (localStorage.getItem(getHash().id) != null) {
+        buttonLike.children[0].alt = 'buttonDislike'
+        buttonLike.children[0].title = 'buttonDislike'
+        buttonLike.addEventListener('click', () => {
+            deleteFavorites(getHash().id)
+            buttonLike.children[0].alt = 'buttonLike'
+            buttonLike.children[0].title = 'buttonLike'
+        })
+    } else {
+        buttonLike.addEventListener('click', () => {
+            saveFavorites('', cardArtist.title)
+            buttonLike.children[0].alt = 'buttonDislike'
+            buttonLike.children[0].title = 'buttonDislike'
+        })
+    }
 
     return main
 }

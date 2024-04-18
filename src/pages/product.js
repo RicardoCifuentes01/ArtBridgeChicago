@@ -1,4 +1,7 @@
 import { informationProduct } from "../utils/getProduct.js"
+import saveFavorites from "../utils/saveFavorites.js"
+import getHash from "../utils/getHash.js"
+import deleteFavorites from "../utils/deleteFavorites.js"
 
 const product = async (main) => {
     const filterProduct = async (information) => {
@@ -27,6 +30,24 @@ const product = async (main) => {
     cardProduct.description = `${filteredInformation.description}`
 
     main.appendChild(cardProduct)
+
+    const buttonLike = cardProduct.children[1]
+
+    if (localStorage.getItem(getHash().id) != null) {
+        buttonLike.children[0].alt = 'buttonDislike'
+        buttonLike.children[0].title = 'buttonDislike'
+        buttonLike.addEventListener('click', () => {
+            deleteFavorites(getHash().id)
+            buttonLike.children[0].alt = 'buttonLike'
+            buttonLike.children[0].title = 'buttonLike'
+        })
+    } else {
+        buttonLike.addEventListener('click', () => {
+            saveFavorites(cardProduct.image, cardProduct.title)
+            buttonLike.children[0].alt = 'buttonDislike'
+            buttonLike.children[0].title = 'buttonDislike'
+        })
+    }
 }
 
 export default product

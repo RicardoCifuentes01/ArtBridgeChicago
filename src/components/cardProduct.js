@@ -24,6 +24,13 @@ const cardProduct = () => {
             imageProduct.setAttribute('title', this.title)
             figureProduct.appendChild(imageProduct)
 
+            const buttonLike = document.createElement('figure')
+
+            const imgLike = document.createElement('img')
+            imgLike.setAttribute('alt', 'buttonLike')
+            imgLike.setAttribute('title', 'buttonLike')
+            buttonLike.appendChild(imgLike)
+
             const titleProduct = document.createElement('h1')
             titleProduct.textContent = `${this.title}`
 
@@ -37,7 +44,7 @@ const cardProduct = () => {
             const descriptionProduct = document.createElement('p')
             descriptionProduct.innerHTML = `${this.description}`
 
-            template.content.append(figureProduct, titleProduct, priceProduct, buyProduct, descriptionProduct)
+            template.content.append(figureProduct, buttonLike, titleProduct, priceProduct, buyProduct, descriptionProduct)
 
             return template
         }

@@ -23,13 +23,20 @@ const cardArtist = () => {
             const isArtistArtist = document.createElement('h2')
             isArtistArtist.textContent = `${this.isArtist}`
 
+            const buttonLike = document.createElement('figure')
+
+            const imgLike = document.createElement('img')
+            imgLike.setAttribute('alt', 'buttonLike')
+            imgLike.setAttribute('title', 'buttonLike')
+            buttonLike.appendChild(imgLike)
+
             const lifeArtist = document.createElement('h3')
             lifeArtist.textContent = `${this.birth} - ${this.death}`
 
             const descriptionArtist = document.createElement('p')
             descriptionArtist.innerHTML = `${this.description}`
 
-            template.content.append(titleArtist, isArtistArtist, lifeArtist, descriptionArtist)
+            template.content.append(titleArtist, isArtistArtist, buttonLike, lifeArtist, descriptionArtist)
 
             return template
         }
