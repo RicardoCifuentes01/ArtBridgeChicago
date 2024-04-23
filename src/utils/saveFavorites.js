@@ -1,8 +1,4 @@
-import getHash from "./getHash.js"
-
-const saveFavorites = (image, title) => {
-
-    const page = getHash().page
+const saveFavorites = (page, id, image, title) => {
 
     const favorite = {
         page: page,
@@ -10,7 +6,7 @@ const saveFavorites = (image, title) => {
         title: title
     }
 
-    localStorage.setItem(`${getHash().id}`, JSON.stringify(favorite))
+    localStorage.setItem(`${id}`, JSON.stringify(favorite))
 
 }
 

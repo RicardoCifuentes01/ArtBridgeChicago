@@ -177,21 +177,27 @@ const artist = async (main) => {
 
     const buttonLike = cardArtist.children[2]
 
-    if (localStorage.getItem(getHash().id) != null) {
-        buttonLike.children[0].alt = 'buttonDislike'
-        buttonLike.children[0].title = 'buttonDislike'
-        buttonLike.addEventListener('click', () => {
-            deleteFavorites(getHash().id)
-            buttonLike.children[0].alt = 'buttonLike'
-            buttonLike.children[0].title = 'buttonLike'
-        })
-    } else {
-        buttonLike.addEventListener('click', () => {
-            saveFavorites('', cardArtist.title)
+    const like = () => {
+        if (localStorage.getItem(getHash().id) != null) {
             buttonLike.children[0].alt = 'buttonDislike'
             buttonLike.children[0].title = 'buttonDislike'
-        })
+            buttonLike.addEventListener('click', () => {
+                deleteFavorites(getHash().id)
+                buttonLike.children[0].alt = 'buttonLike'
+                buttonLike.children[0].title = 'buttonLike'
+                like()
+            })
+        } else {
+            buttonLike.addEventListener('click', () => {
+                saveFavorites(getHash().page, getHash().id, '', cardArtist.title)
+                buttonLike.children[0].alt = 'buttonDislike'
+                buttonLike.children[0].title = 'buttonDislike'
+                like()
+            })
+        }
     }
+
+    like()
 
     return main
 }

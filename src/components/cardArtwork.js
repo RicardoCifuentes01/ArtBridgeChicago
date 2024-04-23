@@ -27,6 +27,7 @@ const cardArtwork = () => {
             figureArtwork.appendChild(imgArtwork)
 
             const buttonLike = document.createElement('figure')
+            buttonLike.className = 'buttonLike'
 
             const imgLike = document.createElement('img')
             imgLike.setAttribute('alt', 'buttonLike')

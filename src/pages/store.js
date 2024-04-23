@@ -1,12 +1,17 @@
 import { informationProduct } from "../utils/getProduct.js"
 
-const store = async (main) => {
-
+const store = async (main, preShop = false) => {
 
     const storeContent = async (presentPage) => {
         const getStore = async () => {
             try {
-                const response = await fetch(`https://api.artic.edu/api/v1/products?fields=id,image_url,title,max_current_price,description&page=${presentPage}`)
+                let response = undefined
+                if (!preShop) {
+                    response = await fetch(`https://api.artic.edu/api/v1/products?&fields=id,image_url,title,max_current_price,description&page=${presentPage}`)
+                } else {
+                    response = await fetch(`https://api.artic.edu/api/v1/products?limit=4&fields=id,image_url,title,max_current_price,description&page=${presentPage}`)
+                }
+
                 const information = await response.json()
                 return information
             } catch (error) {
@@ -108,11 +113,15 @@ const store = async (main) => {
                 storeContent(presentPage)
             })
 
-            main.appendChild(previousPage)
+            if (!preShop) {
+                main.appendChild(previousPage)
+            }
 
         }
 
-        main.appendChild(selectPage)
+        if (!preShop) {
+            main.appendChild(selectPage)
+        }
 
         if (presentPage != info.pagination.total_pages) {
             const nextPage = document.createElement('button')
@@ -129,9 +138,27 @@ const store = async (main) => {
                 storeContent(presentPage)
             })
 
-            main.appendChild(nextPage)
+            if (!preShop) {
+                main.appendChild(nextPage)
+            }
         }
 
+        if (preShop) {
+            const divMoreProducts = document.createElement('div')
+            const textMoreProducts = document.createElement('p')
+            textMoreProducts.textContent = 'More products from the store'
+            const figureMoreProducts = document.createElement('figure')
+            const imgMoreProducts = document.createElement('img')
+            imgMoreProducts.alt = 'More products from the store'
+            imgMoreProducts.title = 'More products from the store'
+            figureMoreProducts.appendChild(imgMoreProducts)
+            divMoreProducts.append(textMoreProducts, figureMoreProducts)
+            main.appendChild(divMoreProducts)
+
+            figureMoreProducts.addEventListener('click', () => {
+                location.hash = `#store`
+            })
+        }
     }
 
     storeContent(1)

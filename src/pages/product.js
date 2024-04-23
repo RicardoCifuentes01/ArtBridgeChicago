@@ -33,21 +33,27 @@ const product = async (main) => {
 
     const buttonLike = cardProduct.children[1]
 
-    if (localStorage.getItem(getHash().id) != null) {
-        buttonLike.children[0].alt = 'buttonDislike'
-        buttonLike.children[0].title = 'buttonDislike'
-        buttonLike.addEventListener('click', () => {
-            deleteFavorites(getHash().id)
-            buttonLike.children[0].alt = 'buttonLike'
-            buttonLike.children[0].title = 'buttonLike'
-        })
-    } else {
-        buttonLike.addEventListener('click', () => {
-            saveFavorites(cardProduct.image, cardProduct.title)
+    const like = () => {
+        if (localStorage.getItem(getHash().id) != null) {
             buttonLike.children[0].alt = 'buttonDislike'
             buttonLike.children[0].title = 'buttonDislike'
-        })
+            buttonLike.addEventListener('click', () => {
+                deleteFavorites(getHash().id)
+                buttonLike.children[0].alt = 'buttonLike'
+                buttonLike.children[0].title = 'buttonLike'
+                like()
+            })
+        } else {
+            buttonLike.addEventListener('click', () => {
+                saveFavorites(getHash().page, getHash().id, cardProduct.image, cardProduct.title)
+                buttonLike.children[0].alt = 'buttonDislike'
+                buttonLike.children[0].title = 'buttonDislike'
+                like()
+            })
+        }
     }
+
+    like()
 }
 
 export default product
