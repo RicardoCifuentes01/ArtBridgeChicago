@@ -1,0 +1,42 @@
+footer {
+  width: 100%;
+  padding: 16px 16px 80px;
+  font-size: 12px;
+  line-height: 24px;
+  font-family: "Alexandria";
+  background-color: #E6E8EB;
+  transition: 1s ease;
+}
+footer ul {
+  width: -moz-max-content;
+  width: max-content;
+  margin: 32px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+footer ul li {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+footer ul li figure {
+  width: 40px;
+  height: 40px;
+}
+
+.footer__information {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.footer__information a {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 16px;
+}
+.footer__information a figure {
+  width: 40px;
+  height: 40px;
+}

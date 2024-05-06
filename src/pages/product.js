@@ -2,8 +2,19 @@ import { informationProduct } from "../utils/getProduct.js"
 import saveFavorites from "../utils/saveFavorites.js"
 import getHash from "../utils/getHash.js"
 import deleteFavorites from "../utils/deleteFavorites.js"
+import styles from "../utils/styles.js"
+import zoomWork from "../utils/zoomWork.js"
+import zoomWorkStyles from "../utils/zoomWorkStyles.js"
+import closeZoom from "../utils/closeZoom.js"
+import viewWork from "../utils/viewWork.js"
+
 
 const product = async (main) => {
+
+    //STYLES
+    styles('work').appendChild(await zoomWorkStyles())
+
+    //FILTERED INFORMATION
     const filterProduct = async (information) => {
 
         const product = await information
@@ -22,7 +33,9 @@ const product = async (main) => {
 
     const filteredInformation = await filterProduct(informationProduct())
 
+    //CARD
     const cardProduct = document.createElement('card-product')
+    cardProduct.className = 'card'
     cardProduct.image = `${filteredInformation.image}`
     cardProduct.title = `${filteredInformation.title}`
     cardProduct.price = `${filteredInformation.price}`
@@ -31,29 +44,70 @@ const product = async (main) => {
 
     main.appendChild(cardProduct)
 
-    const buttonLike = cardProduct.children[1]
+    //VIEW WORK
+    viewWork(filteredInformation.image, 'product')
 
-    const like = () => {
-        if (localStorage.getItem(getHash().id) != null) {
-            buttonLike.children[0].alt = 'buttonDislike'
-            buttonLike.children[0].title = 'buttonDislike'
-            buttonLike.addEventListener('click', () => {
-                deleteFavorites(getHash().id)
-                buttonLike.children[0].alt = 'buttonLike'
-                buttonLike.children[0].title = 'buttonLike'
-                like()
+    //LIKE
+    const page = getHash().page
+    const id = getHash().id
+
+    const buttonLike = cardProduct.children[1].children[0]
+
+    const heart = document.getElementById('heart')
+    const path = document.getElementById('pathHeart')
+
+    const like = (page, id, card, button, heart, path) => {
+        if (localStorage.getItem(id) != null) {
+            setTimeout(() => { heart.classList.add('svgFillProduct') }, 700)
+            button.children[0].alt = 'buttonDislike'
+            button.children[0].title = 'buttonDislike'
+
+            button.addEventListener('click', () => {
+                deleteFavorites(id)
+                heart.classList.remove('likeProduct')
+                path.classList.remove('likeProduct')
+                heart.classList.add('dislikeProduct')
+                path.classList.add('dislikeProduct')
+                setTimeout(() => { heart.classList.remove('svgFillProduct') }, 700)
+                button.children[0].alt = 'buttonLike'
+                button.children[0].title = 'buttonLike'
+                like(page, id, card, button, heart, path)
             })
         } else {
-            buttonLike.addEventListener('click', () => {
-                saveFavorites(getHash().page, getHash().id, cardProduct.image, cardProduct.title)
-                buttonLike.children[0].alt = 'buttonDislike'
-                buttonLike.children[0].title = 'buttonDislike'
-                like()
+            button.addEventListener('click', () => {
+                saveFavorites(page, id, card.image, card.title)
+                heart.classList.remove('dislikeProduct')
+                path.classList.remove('dislikeProduct')
+                heart.classList.add('likeProduct')
+                path.classList.add('likeProduct')
+                setTimeout(() => { heart.classList.add('svgFillProduct') }, 700)
+                button.children[0].alt = 'buttonDislike'
+                button.children[0].title = 'buttonDislike'
+                like(page, id, card, button, heart, path)
             })
         }
     }
 
-    like()
+    like(page, id, cardProduct, buttonLike, heart, path)
+
+    //ZOOM
+    const figureWork = await cardProduct.children[0]
+
+    let statusZoom = false
+
+    figureWork.addEventListener('click', async () => {
+        if (!statusZoom) {
+
+            statusZoom = true
+
+            const figureCloseZoom = await zoomWork(filteredInformation.image, 'product', cardProduct, figureWork)
+
+            figureCloseZoom.addEventListener('click', async () => {
+                statusZoom = await closeZoom(filteredInformation.image, 'product', cardProduct, figureWork)
+            })
+        }
+    })
+
 }
 
 export default product

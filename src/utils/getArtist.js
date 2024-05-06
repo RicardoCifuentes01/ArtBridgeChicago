@@ -3,7 +3,10 @@ import error from "../pages/error.js";
 
 const getArtist = async (id) => {
     try {
-        const response = await fetch(`https://api.artic.edu/api/v1/agents/${id}?fields=title,is_artist,birth_date,death_date,description`)
+        const response = await fetch(`https://api.artic.edu/api/v1/agents/${id}?fields=title,is_artist,birth_date,death_date,description`, {
+            method: 'GET',
+            mode: 'cors',
+        })
         if (!response.ok || id == '') {
             throw new Error(`HTTP error! status: ${response.status}`);
         }

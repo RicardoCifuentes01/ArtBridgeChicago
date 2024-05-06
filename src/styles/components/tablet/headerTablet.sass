@@ -1,0 +1,61 @@
+@import "../variables"
+
+header
+    position: fixed
+    z-index: 1
+    display: flex
+    width: 100%
+    padding: $gms/2 $lms
+    font-family: $nunito-sans
+    font-weight: bold
+    justify-content: space-between
+    align-items: center
+    transition: 1s ease
+
+    ul
+        display: flex
+        gap: $gms
+
+        a
+            color: $color-blue
+
+        li:nth-child(2)
+            a
+                color: $color-purple
+
+    div
+        width: 33%
+        display: flex
+
+        input
+            width: 90%
+            padding: $ms/2 $ms
+            color: $color-gray-texts
+            font-family: $nunito-sans
+            font-size: $text
+            border: none
+            border-top-left-radius: 45px
+            border-bottom-left-radius: 45px
+            box-shadow: $box-inverted-shadow
+            box-sizing: border-box
+
+        input::placeholder
+            font-family: $nunito-sans
+            font-size: $text
+
+        input:focus
+            outline: none
+            border: 1px solid $color-blue
+            box-sizing: border-box
+
+        button
+            padding: $ms
+            border: none
+            background-color: $color-blue
+            border-top-right-radius: 45px
+            border-bottom-right-radius: 45px
+
+            figure
+                width: 15px
+                height: 15px
+                background-color: transparent

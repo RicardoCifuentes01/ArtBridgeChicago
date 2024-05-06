@@ -1,0 +1,11 @@
+footer ul {
+  width: 100%;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0px;
+  justify-content: space-evenly;
+}
+footer ul li {
+  flex-direction: column;
+  gap: 8px;
+}

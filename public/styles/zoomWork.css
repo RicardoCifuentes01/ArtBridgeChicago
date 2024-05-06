@@ -1,0 +1,40 @@
+.header--hidden, .nav--hidden, .informationWork--hidden, .footer--hidden {
+  opacity: 0;
+  display: none;
+}
+
+.main--zoom {
+  padding-top: 0;
+}
+
+.figure--zoom {
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+}
+
+.img--zoom--mobile {
+  width: 100%;
+  height: auto;
+}
+
+.img--zoom {
+  width: auto;
+  height: 80vh;
+}
+
+.img--zoom--vertical {
+  width: auto;
+  height: 70vh;
+}
+
+.figureClose {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 24px;
+  height: 24px;
+  background-color: transparent;
+}

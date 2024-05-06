@@ -1,0 +1,140 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.buttonLike, .buttonLikeProduct {
+  position: absolute;
+  display: block;
+  fill: transparent;
+  stroke-width: 20;
+  cursor: pointer;
+  top: -20px;
+  right: 32px;
+  padding: 8px;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background-color: #E6E8EB;
+  box-shadow: 4px 4px 5px #adaeb0, -4px -4px 5px #ffffff;
+}
+.buttonLike svg, .buttonLikeProduct svg {
+  overflow: visible;
+}
+.buttonLike path, .buttonLikeProduct path {
+  stroke-dashoffset: 0;
+  stroke-dasharray: 1550;
+  transform-origin: center;
+}
+
+.buttonLike {
+  stroke: #185EF1;
+}
+.buttonLike .like {
+  animation: like 1s ease-in-out forwards;
+}
+.buttonLike .dislike {
+  animation: dislike 1s ease-in-out forwards;
+}
+
+.buttonLikeProduct {
+  stroke: #B918F1;
+}
+.buttonLikeProduct .likeProduct {
+  animation: likeProduct 1s ease-in-out forwards;
+}
+.buttonLikeProduct .dislikeProduct {
+  animation: dislikeProduct 1s ease-in-out forwards;
+}
+
+.svgFill {
+  fill: #185EF1;
+}
+
+.svgFillProduct {
+  fill: #B918F1;
+}
+
+@media (min-width: 600px) {
+  .buttonLikeVertical {
+    top: 80px;
+    left: -20px;
+  }
+  .buttonLikeVerticalProduct {
+    top: 30px;
+    left: -20px;
+  }
+}
+@keyframes like {
+  10% {
+    fill: transparent;
+  }
+  20% {
+    transform: scale(0.01);
+  }
+  70% {
+    fill: #185EF1;
+    transform: scale(1);
+  }
+  80% {
+    fill: #185EF1;
+  }
+  100% {
+    fill: #185EF1;
+  }
+}
+@keyframes dislike {
+  0% {
+    fill: #185EF1;
+  }
+  20% {
+    fill: #185EF1;
+  }
+  30% {
+    fill: #185EF1;
+    transform: scale(1);
+  }
+  80% {
+    transform: scale(0.01);
+  }
+  90% {
+    fill: transparent;
+  }
+}
+@keyframes likeProduct {
+  10% {
+    fill: transparent;
+  }
+  20% {
+    transform: scale(0.01);
+  }
+  70% {
+    fill: #B918F1;
+    transform: scale(1);
+  }
+  80% {
+    fill: #B918F1;
+  }
+  100% {
+    fill: #B918F1;
+  }
+}
+@keyframes dislikeProduct {
+  0% {
+    fill: #B918F1;
+  }
+  20% {
+    fill: #B918F1;
+  }
+  30% {
+    fill: #B918F1;
+    transform: scale(1);
+  }
+  80% {
+    transform: scale(0.01);
+  }
+  90% {
+    fill: transparent;
+  }
+}

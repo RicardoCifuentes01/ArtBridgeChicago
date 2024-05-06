@@ -1,0 +1,28 @@
+nav {
+  position: fixed;
+  bottom: 10px;
+  left: 5vw;
+  width: 90%;
+  padding: 12px 24px;
+  border-radius: 64px;
+  background-color: transparent;
+}
+nav ul {
+  max-width: 300px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  background-color: transparent;
+}
+nav ul li {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  box-shadow: 4px 4px 5px #adaeb0, -4px -4px 5px #ffffff;
+  background-color: #E6E8EB;
+}
+nav ul li figure {
+  margin: 8px auto;
+  width: 60%;
+  height: 24px;
+}

@@ -175,29 +175,19 @@ const artist = async (main) => {
 
     main.append(cardArtist, artworksArtistSection, artworksArtistNavSection)
 
-    const buttonLike = cardArtist.children[2]
 
-    const like = () => {
-        if (localStorage.getItem(getHash().id) != null) {
-            buttonLike.children[0].alt = 'buttonDislike'
-            buttonLike.children[0].title = 'buttonDislike'
-            buttonLike.addEventListener('click', () => {
-                deleteFavorites(getHash().id)
-                buttonLike.children[0].alt = 'buttonLike'
-                buttonLike.children[0].title = 'buttonLike'
-                like()
-            })
-        } else {
-            buttonLike.addEventListener('click', () => {
-                saveFavorites(getHash().page, getHash().id, '', cardArtist.title)
-                buttonLike.children[0].alt = 'buttonDislike'
-                buttonLike.children[0].title = 'buttonDislike'
-                like()
-            })
-        }
-    }
 
-    like()
+    //LIKE
+
+    const buttonLike = await cardArtist.children[2]
+
+    const page = getHash().page
+    const id = getHash().id
+
+    const heart = document.getElementById('heart')
+    const path = document.getElementById('pathHeart')
+
+    like(page, id, cardArtist, buttonLike, heart, path)
 
     return main
 }

@@ -1,0 +1,28 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: #E6E8EB;
+}
+
+ul {
+  list-style: none;
+}
+
+img {
+  width: 100%;
+  background-color: transparent;
+}
+
+p {
+  line-height: 32px;
+  color: #64646C;
+}
+
+a {
+  text-decoration: none;
+}
+
+audio {
+  width: 100%;
+}

@@ -1,12 +1,21 @@
 import { informationArtwork } from "../utils/getArtwork.js"
-import saveFavorites from "../utils/saveFavorites.js"
 import getHash from "../utils/getHash.js"
-import deleteFavorites from "../utils/deleteFavorites.js"
 import filterArtwork from "../utils/filterArtwork.js"
 import { informationArtist } from "../utils/getArtist.js"
+import styles from "../utils/styles.js"
+import zoomWork from "../utils/zoomWork.js"
+import zoomWorkStyles from "../utils/zoomWorkStyles.js"
+import closeZoom from "../utils/closeZoom.js"
+import viewWork from "../utils/viewWork.js"
+import like from "../utils/like.js"
+
 
 const artwork = async (main, defaultArtwork = undefined) => {
 
+    //STYLES
+    styles('work').appendChild(await zoomWorkStyles())
+
+    //FILTERED INFORMATION
     let filteredInformation = undefined
 
     if (defaultArtwork == undefined) {
@@ -15,8 +24,10 @@ const artwork = async (main, defaultArtwork = undefined) => {
         filteredInformation = await filterArtwork(defaultArtwork)
     }
 
+    //CARD
     const cardArtwork = document.createElement('card-artwork')
-    cardArtwork.image = `https://www.artic.edu/iiif/2/${filteredInformation.image}/full/256,/0/default.jpg`
+    cardArtwork.className = 'card'
+    cardArtwork.image = `https://www.artic.edu/iiif/2/${filteredInformation.image}/full/1700,/0/default.jpg`
     cardArtwork.year = `${filteredInformation.year}`
     cardArtwork.title = `${filteredInformation.title}`
     cardArtwork.description = `${filteredInformation.description}`
@@ -27,39 +38,47 @@ const artwork = async (main, defaultArtwork = undefined) => {
 
     main.appendChild(cardArtwork)
 
-    const page = getHash().page || defaultArtwork.page
-    const id = getHash().id || defaultArtwork.id
-
-    const buttonLike = await cardArtwork.children[1]
-
-    const like = () => {
-        if (localStorage.getItem(id) != null) {
-            buttonLike.children[0].alt = 'buttonDislike'
-            buttonLike.children[0].title = 'buttonDislike'
-            buttonLike.addEventListener('click', () => {
-                deleteFavorites(id)
-                buttonLike.children[0].alt = 'buttonLike'
-                buttonLike.children[0].title = 'buttonLike'
-                like()
-            })
-        } else {
-            buttonLike.addEventListener('click', () => {
-                saveFavorites(page, id, cardArtwork.image, cardArtwork.title)
-                buttonLike.children[0].alt = 'buttonDislike'
-                buttonLike.children[0].title = 'buttonDislike'
-                like()
-            })
-        }
-    }
-
-    like()
-
-    const buttonArtist = await cardArtwork.children[7]
+    //ARTIST
+    let buttonArtist = undefined
+    filteredInformation.sound == null ? buttonArtist = await cardArtwork.children[1].children[6] : buttonArtist = await cardArtwork.children[1].children[7]
 
     buttonArtist.addEventListener('click', () => {
         location.hash = `#artist=${filteredInformation.artist_id}`
         informationArtist()
     })
+
+
+    //VIEW WORK
+    await viewWork(filteredInformation.image, 'artwork')
+
+    //ZOOM
+    const figureWork = await cardArtwork.children[0]
+
+    let statusZoom = false
+
+    figureWork.addEventListener('click', async () => {
+        if (!statusZoom) {
+
+            statusZoom = true
+
+            const figureCloseZoom = await zoomWork(filteredInformation.image, 'artwork', cardArtwork, figureWork)
+
+            figureCloseZoom.addEventListener('click', async () => {
+                statusZoom = await closeZoom(filteredInformation.image, 'artwork', cardArtwork, figureWork)
+            })
+        }
+    })
+
+    //LIKE
+    const page = getHash().page || defaultArtwork.page
+    const id = getHash().id || defaultArtwork.id
+
+    const buttonLike = await cardArtwork.children[1].children[0]
+
+    const heart = document.getElementById('heart')
+    const path = document.getElementById('pathHeart')
+
+    like(page, id, cardArtwork, buttonLike, heart, path)
 
     return main
 }

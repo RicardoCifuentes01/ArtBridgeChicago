@@ -1,0 +1,63 @@
+header {
+  position: fixed;
+  z-index: 1;
+  display: flex;
+  width: 100%;
+  padding: 8px 32px;
+  font-family: "Nunito Sans";
+  font-weight: bold;
+  justify-content: space-between;
+  align-items: center;
+  transition: 1s ease;
+}
+header ul {
+  display: flex;
+  gap: 16px;
+}
+header ul a {
+  color: #185EF1;
+}
+header ul li:nth-child(2) a {
+  color: #B918F1;
+}
+header div {
+  width: 33%;
+  display: flex;
+}
+header div input {
+  width: 90%;
+  padding: 4px 8px;
+  color: #64646C;
+  font-family: "Nunito Sans";
+  font-size: 14px;
+  border: none;
+  border-top-left-radius: 45px;
+  border-bottom-left-radius: 45px;
+  box-shadow: inset 4px 4px 8px #bebebe, inset -4px -4px 8px #ffffff;
+  box-sizing: border-box;
+}
+header div input::-moz-placeholder {
+  font-family: "Nunito Sans";
+  font-size: 14px;
+}
+header div input::placeholder {
+  font-family: "Nunito Sans";
+  font-size: 14px;
+}
+header div input:focus {
+  outline: none;
+  border: 1px solid #185EF1;
+  box-sizing: border-box;
+}
+header div button {
+  padding: 8px;
+  border: none;
+  background-color: #185EF1;
+  border-top-right-radius: 45px;
+  border-bottom-right-radius: 45px;
+}
+header div button figure {
+  width: 15px;
+  height: 15px;
+  background-color: transparent;
+}

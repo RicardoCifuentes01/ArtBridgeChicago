@@ -1,0 +1,59 @@
+@import "../../components/variables"
+
+.informationWork
+    position: relative
+    padding: $lms $lms $gms
+    display: flex
+    flex-direction: column
+    gap: $gms
+    color: $color-gray-texts
+    font-size: $text
+    font-family: $nunito-sans
+    background-color: $color-gray-background
+    border-top-left-radius: 32px
+    border-top-right-radius: 32px
+
+.titleArtwork
+    color: $color-blue
+    font-style: italic
+
+.figureWork
+    height: 370px
+    transition: 1s ease
+
+    img
+        display: block
+        width: 100%
+        height: 400px
+        object-fit: cover
+        transition: 1s ease
+
+.authorArtwork
+    padding: $gms $ms
+    font-weight: bold
+    border-radius: 12px
+    box-shadow: $box-shadow
+    cursor: pointer
+
+.titleProduct
+    color: $color-black
+
+.divBuy
+    display: flex
+    gap: $gms
+    align-items: center
+    justify-content: space-between
+
+.priceProduct
+    color: $color-purple
+
+.buyProduct
+    width: max-content
+    padding: 6px 12px
+    color: $color-white
+    font-size: $title-2
+    font-weight: 700
+    font-style: italic
+    background-color: $color-purple
+    border-radius: 12px
+    box-shadow: 4px 4px 5px $color-purple

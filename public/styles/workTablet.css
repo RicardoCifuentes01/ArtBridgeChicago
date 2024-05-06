@@ -1,0 +1,59 @@
+.card {
+  display: block;
+  margin: 16px auto;
+  padding: 0 0 16px;
+  width: 90%;
+  box-shadow: 4px 4px 5px #adaeb0, -4px -4px 5px #ffffff;
+  border-top-left-radius: 32px;
+  border-top-right-radius: 32px;
+}
+
+.figureWork {
+  height: 400px;
+  border-top-left-radius: 32px;
+  border-top-right-radius: 32px;
+  transition: 0.3s ease;
+}
+.figureWork img {
+  border-top-left-radius: 32px;
+  border-top-right-radius: 32px;
+  height: 430px;
+  transition: 0.3s ease;
+}
+
+.authorArtwork {
+  margin: 0 auto;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+.cardVertical {
+  display: flex;
+  margin: 16px auto;
+  padding: 0;
+  width: 90%;
+  box-shadow: 4px 4px 5px #adaeb0, -4px -4px 5px #ffffff;
+  border-top-left-radius: 32px;
+  border-bottom-left-radius: 32px;
+  border-top-right-radius: unset;
+}
+
+.figureWorkVertical {
+  width: 30%;
+  height: auto;
+  transition: 0.3s ease;
+}
+.figureWorkVertical img {
+  width: 115%;
+  height: 100%;
+  border-top-left-radius: 32px;
+  border-bottom-left-radius: 32px;
+  border-top-right-radius: unset;
+  transition: 0.3s ease;
+}
+
+.informationWorkVertical {
+  width: 70%;
+  border-top-right-radius: unset;
+  border-bottom-left-radius: 32px;
+}

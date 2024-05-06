@@ -13,7 +13,7 @@ const header = (headerElement) => {
         listPages.appendChild(item)
     }
 
-    const search = document.createElement('section')
+    const search = document.createElement('div')
 
     const searchField = document.createElement('input')
     searchField.setAttribute('type', 'text')
@@ -24,6 +24,7 @@ const header = (headerElement) => {
     const buttonSearch = document.createElement('button')
     const searchFigure = document.createElement('figure')
     const searchImg = document.createElement('img')
+    searchImg.setAttribute('src', 'https://i.ibb.co/3MZ5TTN/buscar-4.png')
     searchImg.setAttribute('alt', 'search')
     searchImg.setAttribute('title', 'search')
     searchFigure.appendChild(searchImg)
