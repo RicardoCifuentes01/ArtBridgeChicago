@@ -1,0 +1,33 @@
+@import "../../components/variables"
+
+.mainArtist
+    display: flex
+
+.cardArtist
+    width: 50%
+    height: max-content
+    padding: 0 $lms
+
+.divArtworksSection
+    width: 50%
+
+.artworksArtistSection
+    padding: $gms
+    display: grid
+    column-gap: 5%
+    row-gap: 5vw
+    grid-template-columns: 47.4% 47.4%
+
+@media (min-width: 1000px)
+
+    .artworksArtistSection
+        column-gap: 5%
+        row-gap: 2.5vw
+        grid-template-columns: 30% 30% 30%
+
+@media (min-width: 1800px)
+
+    .artworksArtistSection
+        column-gap: 3%
+        row-gap: 1.5vw
+        grid-template-columns: 30% 30% 30%

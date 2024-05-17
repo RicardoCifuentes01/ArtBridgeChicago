@@ -1,0 +1,61 @@
+.mainHome .informationWork {
+  padding: 32px 32px 16px;
+}
+
+.descriptionABC {
+  padding: 0 32px;
+}
+
+.randomWorkSection {
+  width: 60%;
+}
+
+.recommendedArtworksSection {
+  padding: 0;
+}
+
+.recommendedArtworksDiv {
+  margin: 0 auto;
+  width: 90%;
+  padding: 16px;
+  flex-direction: column-reverse;
+  box-shadow: inset 4px 4px 8px #bebebe, inset -4px -4px 8px #ffffff;
+  border-radius: 0;
+}
+
+.selected {
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 32px;
+  border-bottom-right-radius: 32px;
+}
+
+.selectedRecommendedArtwork {
+  width: 100%;
+  border-radius: 0;
+}
+
+.figuresRecommendedArtworks {
+  flex-direction: row;
+  padding: 0 0 8px;
+  width: 100%;
+  overflow-x: scroll;
+  border-radius: 0;
+}
+
+.figuresRecommendedArtworks::-webkit-scrollbar, .artistsCards::-webkit-scrollbar {
+  height: 8px;
+  background: #E6E8EB;
+}
+
+.figuresRecommendedArtworks::-webkit-scrollbar-thumb, .artistsCards::-webkit-scrollbar-thumb {
+  background: #64646C;
+  border-radius: 10px;
+}
+
+.figureRecommendedArtwork {
+  width: 17%;
+  height: 15vw;
+  max-width: 90px;
+  max-height: 90px;
+  flex-shrink: 0;
+}

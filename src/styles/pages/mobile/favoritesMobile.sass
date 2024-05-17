@@ -1,0 +1,64 @@
+@import "../../components/variables"
+
+h1, h2, h3, p
+    font-family: $nunito-sans
+
+.mainFavorites
+    padding: $gms+47px $gms 0
+    h1
+        text-align: center
+        color: $color-blue
+        font-size: $title-1
+    section
+        padding: $gms
+
+    h2
+        margin-bottom: $gms
+        color: $color-gray-texts
+
+.messageFavorites
+    margin: $mx*4 0 $mx*4
+    text-align: center
+
+.divCategory
+    width: 100%
+    display: grid
+    column-gap: 5%
+    row-gap: 5vw
+    grid-template-columns: 47.4% 47.4%
+
+    div
+        padding: $gms
+        display: grid
+        width: 100%
+        box-shadow: $box-inverted-shadow
+
+        h3
+            margin: $ms 0
+            color: $color-gray-texts
+            font-size: $title-3
+            font-style: italic
+
+        .figureFavorite
+            margin: 0 auto
+            width: 90px
+            height: 90px
+            cursor: pointer
+
+            img
+                width: 100%
+                height: 100%
+                object-fit: cover
+                border-radius: 104px
+                box-shadow: $box-shadow
+
+.buttonDislikeFavorites
+    padding: $ms
+    width: 40px
+    height: 40px
+    border-radius: $brms
+    margin: $ms auto
+    position: static
+    box-shadow: $box-shadow
+    align-self: end
+    cursor: pointer

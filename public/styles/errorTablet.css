@@ -1,0 +1,29 @@
+.mainError {
+  padding: 79px 16px 32px;
+  display: grid;
+  grid-template-rows: repeat(2, auto);
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-areas: "figure title" "figure description";
+}
+
+.titleError {
+  grid-area: title;
+}
+
+.figureError {
+  width: 70%;
+  grid-area: figure;
+}
+
+.descriptionError {
+  grid-area: description;
+  justify-selft: center;
+  align-self: start;
+}
+
+.titleError {
+  justify-self: center;
+  align-self: center;
+  height: -moz-max-content;
+  height: max-content;
+}

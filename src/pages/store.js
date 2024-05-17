@@ -1,7 +1,14 @@
 import { informationProduct } from "../utils/getProduct.js"
+import styles from "../utils/styles.js"
 
 const store = async (main, preShop = false) => {
 
+    //STYLES
+    const ns = 'http://www.w3.org/2000/svg'
+    main.className = 'mainStore'
+    styles('store')
+
+    //STORE
     const storeContent = async (presentPage) => {
         const getStore = async () => {
             try {
@@ -22,14 +29,21 @@ const store = async (main, preShop = false) => {
         const info = await getStore()
 
         const storeTitle = document.createElement('h1')
+        storeTitle.setAttribute('class', 'storeTitle')
         storeTitle.textContent = 'Store'
 
-        main.appendChild(storeTitle)
+        const productsCards = document.createElement('ul')
+        productsCards.setAttribute('class', 'productsCards')
 
+        main.append(storeTitle, productsCards)
+
+
+        //PRODUCTS
         const products = async () => {
 
             for (const article of await info.data) {
 
+                //FILTERED
                 const filterProduct = async (article) => {
 
                     const product = await article
@@ -47,12 +61,13 @@ const store = async (main, preShop = false) => {
 
                 const filteredInformation = await filterProduct(article)
 
-                const productDiv = document.createElement('div')
+                const productCard = document.createElement('li')
+                productCard.setAttribute('class', 'productCard')
 
                 const titleProduct = document.createElement('h2')
                 titleProduct.textContent = filteredInformation.title
 
-                const priceProduct = document.createElement('h2')
+                const priceProduct = document.createElement('h3')
                 priceProduct.textContent = `$ ${filteredInformation.price}`
 
                 const figureProduct = document.createElement('figure')
@@ -63,8 +78,10 @@ const store = async (main, preShop = false) => {
                 const descriptionProduct = document.createElement('p')
                 descriptionProduct.innerHTML = filteredInformation.description
 
-                productDiv.append(titleProduct, descriptionProduct, priceProduct, figureProduct)
-                main.appendChild(productDiv)
+                descriptionProduct.textContent = `${descriptionProduct.textContent.slice(0, 200)} ...`
+
+                productCard.append(titleProduct, descriptionProduct, priceProduct, figureProduct)
+                productsCards.appendChild(productCard)
 
                 titleProduct.addEventListener('click', () => {
                     location.hash = `#product=${filteredInformation.id}`
@@ -80,7 +97,14 @@ const store = async (main, preShop = false) => {
 
         await products()
 
+        //NAV
+        const storeNavSection = document.createElement('section')
+        storeNavSection.setAttribute('class', 'storeNavSection')
+
         const selectPage = document.createElement('select')
+        selectPage.setAttribute('title', 'Select artworks page')
+
+        storeNavSection.appendChild(selectPage)
 
         for (let index = 1; index <= info.pagination.total_pages; index++) {
             const optionPage = document.createElement('option')
@@ -99,13 +123,27 @@ const store = async (main, preShop = false) => {
 
         if (presentPage != 1) {
             const previousPage = document.createElement('button')
-            previousPage.textContent = 'previous'
+            previousPage.setAttribute('class', 'buttonPrevious')
+            previousPage.setAttribute('type', 'button')
+            previousPage.setAttribute('title', 'Previous page')
 
             const previousFigure = document.createElement('figure')
-            const previousImg = document.createElement('img')
-            previousFigure.appendChild(previousImg)
-            previousImg.setAttribute('alt', 'Previous page')
-            previousImg.setAttribute('title', 'Previous page')
+
+            const previousSvg = document.createElementNS(ns, 'svg')
+            previousSvg.setAttribute('viewBox', '0 0 100 80')
+            previousSvg.setAttribute('width', '19')
+            previousSvg.setAttribute('height', '19')
+            previousSvg.setAttribute('xmlns', 'http://www.w3.org/2000/svg')
+
+            const previousPath = document.createElementNS(ns, 'path')
+            previousPath.setAttribute('d', 'M10 50 L50 10 L90 50')
+            previousPath.setAttribute('stroke', '#64646C')
+            previousPath.setAttribute('fill', 'none')
+            previousPath.setAttribute('stroke-width', '10')
+
+            previousSvg.appendChild(previousPath)
+            previousFigure.appendChild(previousSvg)
+            previousPage.appendChild(previousFigure)
 
             previousPage.addEventListener('click', function () {
                 presentPage = presentPage - 1
@@ -114,23 +152,38 @@ const store = async (main, preShop = false) => {
             })
 
             if (!preShop) {
-                main.appendChild(previousPage)
+                storeNavSection.appendChild(previousPage)
             }
 
         }
 
         if (!preShop) {
-            main.appendChild(selectPage)
+            main.appendChild(storeNavSection)
         }
 
         if (presentPage != info.pagination.total_pages) {
             const nextPage = document.createElement('button')
-            nextPage.textContent = 'next'
+            nextPage.setAttribute('class', 'buttonNext')
+            nextPage.setAttribute('type', 'button')
+            nextPage.setAttribute('title', 'Next page')
+
             const nextFigure = document.createElement('figure')
-            const nextImg = document.createElement('img')
-            nextFigure.appendChild(nextImg)
-            nextImg.setAttribute('alt', 'Next page')
-            nextImg.setAttribute('title', 'Next page')
+
+            const nextSvg = document.createElementNS(ns, 'svg')
+            nextSvg.setAttribute('viewBox', '0 0 50 100')
+            nextSvg.setAttribute('width', '19')
+            nextSvg.setAttribute('height', '19')
+            nextSvg.setAttribute('xmlns', 'http://www.w3.org/2000/svg')
+
+            const nextPath = document.createElementNS(ns, 'path')
+            nextPath.setAttribute('d', 'M10 10 L50 50 L10 90')
+            nextPath.setAttribute('stroke', '#64646C')
+            nextPath.setAttribute('fill', 'none')
+            nextPath.setAttribute('stroke-width', '10')
+
+            nextSvg.appendChild(nextPath)
+            nextFigure.appendChild(nextSvg)
+            nextPage.appendChild(nextFigure)
 
             nextPage.addEventListener('click', function () {
                 presentPage = presentPage + 1
@@ -139,18 +192,22 @@ const store = async (main, preShop = false) => {
             })
 
             if (!preShop) {
-                main.appendChild(nextPage)
+                storeNavSection.appendChild(nextPage)
             }
         }
 
+        //PRESHOP
         if (preShop) {
             const divMoreProducts = document.createElement('div')
+            divMoreProducts.setAttribute('class', 'divMoreProducts')
             const textMoreProducts = document.createElement('p')
             textMoreProducts.textContent = 'More products from the store'
             const figureMoreProducts = document.createElement('figure')
+            figureMoreProducts.setAttribute('class', 'figureMoreProducts')
             const imgMoreProducts = document.createElement('img')
             imgMoreProducts.alt = 'More products from the store'
             imgMoreProducts.title = 'More products from the store'
+            imgMoreProducts.src = 'https://i.ibb.co/3fDmhDm/tienda.png'
             figureMoreProducts.appendChild(imgMoreProducts)
             divMoreProducts.append(textMoreProducts, figureMoreProducts)
             main.appendChild(divMoreProducts)

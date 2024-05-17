@@ -1,0 +1,208 @@
+.searchSection {
+  width: 100%;
+  padding: 16px;
+  display: flex;
+}
+.searchSection input {
+  width: 90%;
+  padding: 4px 8px;
+  color: #64646C;
+  font-family: "Nunito Sans";
+  font-size: 14px;
+  border: none;
+  border-top-left-radius: 45px;
+  border-bottom-left-radius: 45px;
+  box-shadow: inset 4px 4px 8px #bebebe, inset -4px -4px 8px #ffffff;
+  box-sizing: border-box;
+}
+.searchSection input::-moz-placeholder {
+  font-family: "Nunito Sans";
+  font-size: 14px;
+}
+.searchSection input::placeholder {
+  font-family: "Nunito Sans";
+  font-size: 14px;
+}
+.searchSection input:focus {
+  outline: none;
+  border: 1px solid #185EF1;
+  box-sizing: border-box;
+}
+.searchSection button {
+  padding: 8px;
+  border: none;
+  background-color: #185EF1;
+  border-top-right-radius: 45px;
+  border-bottom-right-radius: 45px;
+}
+.searchSection button figure {
+  width: 15px;
+  height: 15px;
+  background-color: transparent;
+}
+
+.animationSection {
+  width: 100%;
+  background-color: transparent;
+}
+.animationSection .figureAnimation {
+  margin: 0 auto;
+  width: 60%;
+  height: 60vw;
+  background-color: transparent;
+  animation: animationSearch 3s ease-in-out forwards;
+  /* box-shadow: 1px 1px 50px $color-blue */
+}
+.animationSection .figureAnimation img {
+  background-color: transparent;
+}
+.animationSection p {
+  text-align: center;
+  font-family: "Alexandria";
+  font-size: 14px;
+}
+
+.CategoryWordAnimation {
+  color: #185EF1;
+}
+
+@keyframes animationSearch {
+  0% {
+    opacity: 0;
+  }
+  5% {
+    opacity: 0.5;
+  }
+  10% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 0.8;
+  }
+  90% {
+    opacity: 0.5;
+  }
+  95% {
+    opacity: 0.2;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+.noResults {
+  font-family: "Nunito Sans";
+  color: #64646C;
+  font-weight: 700;
+}
+
+.messageSearch {
+  margin-bottom: 32px;
+  font-family: "Alexandria";
+}
+
+.termSearch {
+  color: #185EF1;
+}
+
+.responseSection {
+  padding: 16px 0 32px 32px;
+}
+
+.titleResponse, .artistTitleResponse {
+  font-family: "Nunito Sans";
+  font-size: 24px;
+  color: #185EF1;
+}
+
+.responseArtists {
+  margin-bottom: 32px;
+}
+
+.titleArtworkArtist {
+  font-size: 12px;
+  font-family: "Nunito Sans";
+}
+
+.artistsCards {
+  padding: 16px 8px;
+  display: flex;
+  flex-direction: row;
+  gap: 32px;
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+}
+
+.artistCard {
+  width: 200px;
+  flex-shrink: 0;
+  height: 350px;
+  overflow: hidden;
+  padding: 16px;
+  box-shadow: 4px 4px 5px #adaeb0, -4px -4px 5px #ffffff;
+  border-radius: 12px;
+  cursor: pointer;
+}
+.artistCard p {
+  margin: 16px 0;
+  line-height: 12px;
+  font-weight: 700;
+  font-style: italic;
+}
+
+.titleArtworksArtistCard {
+  margin: 16px 0;
+  font-family: 16px;
+  color: #185EF1;
+}
+
+.artworksCards {
+  padding: 16px 16px;
+  display: flex;
+  flex-direction: row;
+  gap: 32px;
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+}
+
+.artworkCard {
+  width: 200px;
+  flex-shrink: 0;
+  height: -moz-min-content;
+  height: min-content;
+  padding: 16px;
+  box-shadow: 4px 4px 5px #adaeb0, -4px -4px 5px #ffffff;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.artworkFigure {
+  margin: 0 auto;
+  width: 100px;
+  height: 100px;
+}
+
+.artworkImg {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 104px;
+  box-shadow: 4px 4px 5px #adaeb0, -4px -4px 5px #ffffff;
+}
+
+.artworkDate {
+  margin-top: 16px;
+  font-family: "Nunito Sans";
+  font-size: 14px;
+  font-style: italic;
+  color: #64646C;
+}
+
+.artworkTitle {
+  margin-top: 8px;
+  color: #185EF1;
+  font-size: 24px;
+  font-weight: 700;
+  font-style: italic;
+  font-family: "Nunito Sans";
+}

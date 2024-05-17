@@ -38,6 +38,10 @@
   animation: dislike 1s ease-in-out forwards;
 }
 
+.dislike {
+  animation: dislike 1s ease-in-out forwards;
+}
+
 .buttonLikeProduct {
   stroke: #B918F1;
 }
@@ -45,6 +49,10 @@
   animation: likeProduct 1s ease-in-out forwards;
 }
 .buttonLikeProduct .dislikeProduct {
+  animation: dislikeProduct 1s ease-in-out forwards;
+}
+
+.dislikeProduct {
   animation: dislikeProduct 1s ease-in-out forwards;
 }
 

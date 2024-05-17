@@ -1,0 +1,190 @@
+@import "../../components/variables"
+
+//SEARCH
+.searchSection
+    width: 100%
+    padding: $gms
+    display: flex
+
+    input
+        width: 90%
+        padding: $ms/2 $ms
+        color: $color-gray-texts
+        font-family: $nunito-sans
+        font-size: $text
+        border: none
+        border-top-left-radius: 45px
+        border-bottom-left-radius: 45px
+        box-shadow: $box-inverted-shadow
+        box-sizing: border-box
+
+    input::placeholder
+        font-family: $nunito-sans
+        font-size: $text
+
+    input:focus
+        outline: none
+        border: 1px solid $color-blue
+        box-sizing: border-box
+
+    button
+        padding: $ms
+        border: none
+        background-color: $color-blue
+        border-top-right-radius: 45px
+        border-bottom-right-radius: 45px
+
+        figure
+            width: 15px
+            height: 15px
+            background-color: transparent
+
+//ANIMATION
+.animationSection
+    width: 100%
+    background-color: transparent
+
+    .figureAnimation
+        margin: 0 auto
+        width: 60%
+        height: 60vw
+        background-color: transparent
+        animation: animationSearch 3s ease-in-out forwards
+        /* box-shadow: 1px 1px 50px $color-blue */
+
+        img
+            background-color: transparent
+
+    p
+        text-align: center
+        font-family: $alexandria
+        font-size: $text
+
+.CategoryWordAnimation
+    color: $color-blue
+
+@keyframes animationSearch
+    0%
+        opacity: 0
+
+    5%
+        opacity: 0.5
+
+    10%
+        opacity: 1
+
+    80%
+        opacity: 0.8
+
+    90%
+        opacity: 0.5
+
+    95%
+        opacity: 0.2
+
+    100%
+        opacity: 0
+
+//RESPONSE
+.noResults
+    font-family: $nunito-sans
+    color: $color-gray-texts
+    font-weight: 700
+
+.messageSearch
+    margin-bottom: $lms
+    font-family: $alexandria
+
+.termSearch
+    color: $color-blue
+
+.responseSection
+    padding: $gms 0 $lms $lms
+
+.titleResponse, .artistTitleResponse
+    font-family: $nunito-sans
+    font-size: $title-2
+    color: $color-blue
+
+.responseArtists
+    margin-bottom: $lms
+
+//ARTISTS
+
+.titleArtworkArtist
+    font-size: $text-extra
+    font-family: $nunito-sans
+
+.artistsCards
+    padding: $gms $ms
+    display: flex
+    flex-direction: row
+    gap: $lms
+    overflow-x: scroll
+    scroll-snap-type: x mandatory
+
+.artistCard
+    width: 200px
+    flex-shrink: 0
+    height: 350px
+    overflow: hidden
+    padding: $gms
+    box-shadow: $box-shadow
+    border-radius: $brgms
+    cursor: pointer
+
+    p
+        margin: $gms 0
+        line-height: 12px
+        font-weight: 700
+        font-style: italic
+
+.titleArtworksArtistCard
+    margin: $gms 0
+    font-family: $title-3
+    color: $color-blue
+
+//ARTWORKS
+.artworksCards
+    padding: $gms $gms
+    display: flex
+    flex-direction: row
+    gap: $lms
+    overflow-x: scroll
+    scroll-snap-type: x mandatory
+
+.artworkCard
+    width: 200px
+    flex-shrink: 0
+    height: min-content
+    padding: $gms
+    box-shadow: $box-shadow
+    border-radius: $brgms
+    cursor: pointer
+
+.artworkFigure
+    margin: 0 auto
+    width: 100px
+    height: 100px
+
+.artworkImg
+    width: 100%
+    height: 100%
+    object-fit: cover
+    border-radius: 104px
+    box-shadow: $box-shadow
+
+.artworkDate
+    margin-top: $gms
+    font-family: $nunito-sans
+    font-size: $text
+    font-style: italic
+    color: $color-gray-texts
+
+.artworkTitle
+    margin-top: $ms
+    color: $color-blue
+    font-size: $title-2
+    font-weight: 700
+    font-style: italic
+    font-family: $nunito-sans

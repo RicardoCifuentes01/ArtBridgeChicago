@@ -1,0 +1,138 @@
+h1, h2, h3, p {
+  font-family: "Nunito Sans";
+}
+
+h1 {
+  color: #185EF1;
+}
+
+h2, p, h3 {
+  color: #64646C;
+}
+
+h1, h2 {
+  font-weight: 700;
+}
+
+h3 {
+  font-weight: 400;
+}
+
+.cardArtist {
+  display: grid;
+  grid-template-columns: 83% 17%;
+  grid-template-rows: repeat(4, auto);
+  grid-template-areas: "title title" "status like" "date like" "description description";
+  padding: 32px;
+}
+
+.titleArtist {
+  grid-area: title;
+}
+
+.isArtistArtist {
+  grid-area: status;
+}
+
+.lifeArtist {
+  grid-area: date;
+}
+
+.descriptionArtist {
+  grid-area: description;
+}
+
+.buttoLikeArtist {
+  position: static;
+  margin: 8px 0;
+  grid-area: like;
+  justify-self: end;
+}
+
+.divArtworksSection {
+  width: 100%;
+}
+
+.titleDivArtworksSection {
+  text-align: center;
+  font-size: 32px;
+  color: #185EF1;
+}
+
+.artworksArtistSection {
+  width: 100%;
+  padding: 16px;
+  display: grid;
+  -moz-column-gap: 5%;
+       column-gap: 5%;
+  row-gap: 5vw;
+  grid-template-columns: 47.4% 47.4%;
+}
+
+.artworkImg {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 104px;
+  box-shadow: 4px 4px 5px #adaeb0, -4px -4px 5px #ffffff;
+}
+
+.artworkFigure {
+  margin: 0 auto;
+  width: 100px;
+  height: 100px;
+}
+
+.artworkDiv {
+  padding: 16px;
+  width: 100%;
+  box-shadow: 4px 4px 5px #adaeb0, -4px -4px 5px #ffffff;
+  border-radius: 12px;
+}
+
+.artworkDate {
+  margin-top: 16px;
+}
+
+.artworkTitle {
+  margin-top: 8px;
+  font-weight: 700;
+  font-style: italic;
+}
+
+.artworksArtistNavSection {
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  justify-content: center;
+}
+
+select {
+  all: unset;
+  display: inline-block;
+  width: 19px;
+  text-align: center;
+  padding: 16px;
+  box-shadow: 4px 4px 5px #adaeb0, -4px -4px 5px #ffffff;
+  border-radius: 8px;
+  font-family: "Alexandria";
+  font-size: 16px;
+  color: #64646C;
+}
+
+.buttonNext, .buttonPrevious {
+  padding: 16px;
+  border: none;
+  background-color: #E6E8EB;
+  box-shadow: 4px 4px 5px #adaeb0, -4px -4px 5px #ffffff;
+  border-radius: 8px;
+}
+.buttonNext figure, .buttonPrevious figure {
+  height: 19px;
+}
+
+.buttonPrevious figure {
+  transform: rotate(270deg);
+}

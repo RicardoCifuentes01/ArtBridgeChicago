@@ -1,0 +1,55 @@
+@import "../../components/variables"
+@import "../../components/scroll"
+
+.mainHome
+    .informationWork
+        padding: $lms $lms $gms
+
+//PRESENTATION
+.descriptionABC
+    padding: 0 $lms
+
+//RANDOM
+.randomWorkSection
+    width: 60%
+
+//RECOMMENDED
+.recommendedArtworksSection
+    padding: 0
+
+.recommendedArtworksDiv
+    margin: 0 auto
+    width: 90%
+    padding: $gms
+    flex-direction: column-reverse
+    box-shadow: $box-inverted-shadow
+    border-radius: 0
+
+.selected
+    border-top-left-radius: 0px
+    border-bottom-left-radius: 32px
+    border-bottom-right-radius: 32px
+
+.selectedRecommendedArtwork
+    width: 100%
+    border-radius: 0
+
+.figuresRecommendedArtworks
+    flex-direction: row
+    padding: 0 0 $ms
+    width: 100%
+    overflow-x: scroll
+    border-radius: 0
+
+.figuresRecommendedArtworks::-webkit-scrollbar, .artistsCards::-webkit-scrollbar
+    @include scrollbar
+
+.figuresRecommendedArtworks::-webkit-scrollbar-thumb, .artistsCards::-webkit-scrollbar-thumb
+    @include scrollbarThumb
+
+.figureRecommendedArtwork
+    width: 17%
+    height: 15vw
+    max-width: 90px
+    max-height: 90px
+    flex-shrink: 0

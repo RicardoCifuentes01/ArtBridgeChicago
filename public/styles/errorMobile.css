@@ -1,0 +1,17 @@
+.mainError {
+  padding: 32px 16px;
+}
+
+.titleError {
+  color: #F1183F;
+}
+
+.figureError {
+  margin: 0 auto;
+  width: 80%;
+}
+
+.descriptionError {
+  font-size: 12px;
+  font-family: "Alexandria";
+}

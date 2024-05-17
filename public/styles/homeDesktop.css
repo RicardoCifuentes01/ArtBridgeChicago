@@ -1,0 +1,29 @@
+.presentationRandomDiv {
+  display: flex;
+  padding-top: 32px;
+}
+
+.presentationSeciton {
+  width: 50%;
+  flex-shrink: 0;
+}
+
+.randomWorkSection {
+  justify-content: center;
+  margin: 0 5%;
+  width: 40%;
+  flex-shrink: 0;
+}
+
+.figureRandomArtwork {
+  width: 150px;
+  height: 150px;
+}
+
+@media (min-width: 1200px) {
+  .figuresRecommendedArtworks {
+    overflow: unset;
+    gap: 0;
+    justify-content: space-evenly;
+  }
+}

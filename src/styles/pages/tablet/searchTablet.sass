@@ -1,0 +1,20 @@
+@import "../../components/variables"
+@import "../../components/scroll"
+
+//SEARCH
+.searchSection
+    display: none
+
+//ANIMATION
+.animationSection
+    .figureAnimation
+        margin: 0 auto
+        width: 30%
+        height: 30vw
+
+//ARTISTS ARTWORKS
+.artworksCards::-webkit-scrollbar, .artistsCards::-webkit-scrollbar
+    @include scrollbar
+
+.artworksCards::-webkit-scrollbar-thumb, .artistsCards::-webkit-scrollbar-thumb
+    @include scrollbarThumb

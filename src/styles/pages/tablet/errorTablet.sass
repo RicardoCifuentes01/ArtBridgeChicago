@@ -1,0 +1,25 @@
+@import "../../components/variables"
+
+.mainError
+    padding: $lms+47px $gms $lms
+    display: grid
+    grid-template-rows: repeat(2, auto)
+    grid-template-columns: repeat(2, 1fr)
+    grid-template-areas: "figure title" "figure description"
+
+.titleError
+    grid-area: title
+
+.figureError
+    width: 70%
+    grid-area: figure
+
+.descriptionError
+    grid-area: description
+    justify-selft: center
+    align-self: start
+
+.titleError
+    justify-self: center
+    align-self: center
+    height: max-content

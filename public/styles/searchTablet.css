@@ -1,0 +1,19 @@
+.searchSection {
+  display: none;
+}
+
+.animationSection .figureAnimation {
+  margin: 0 auto;
+  width: 30%;
+  height: 30vw;
+}
+
+.artworksCards::-webkit-scrollbar, .artistsCards::-webkit-scrollbar {
+  height: 8px;
+  background: #E6E8EB;
+}
+
+.artworksCards::-webkit-scrollbar-thumb, .artistsCards::-webkit-scrollbar-thumb {
+  background: #64646C;
+  border-radius: 10px;
+}

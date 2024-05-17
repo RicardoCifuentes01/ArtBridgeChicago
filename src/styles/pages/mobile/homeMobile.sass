@@ -1,0 +1,186 @@
+@import "../../components/variables"
+
+.mainHome
+    .informationWork
+        padding: $lms $ms $lms
+        border-radius: $brmx
+
+//PRESENTATION
+.presentationRandomDiv
+    width: 100%
+
+.figureABC
+    margin: 0 auto
+    width: 70%
+    max-width: 244px
+
+.titleABC
+    margin: 0 auto $gms
+    width: min-content
+    font-size: $title-1
+    line-height: $line-heights-h1-texts
+    color: $color-blue
+
+.descriptionABC, .descriptionRecommendedArtworksSection
+    padding: 0 $gms
+    font-size: $text
+    font-family: $nunito-sans
+
+//RANDOM
+.randomWorkSection
+    margin: $mx auto
+    padding: $gms
+    display: flex
+    flex-direction: column
+    align-items: center
+    gap: $ms
+    width: 90%
+    max-width: 320px
+    box-shadow: $box-inverted-shadow
+    border-radius: $brgms
+
+.titleRecommendedArtworksSection, .titleRandomWorksSection, .titleMessageSelectArtwork
+    color: $color-blue
+    text-align: center
+
+.figureRandomArtwork
+    width: 100px
+    height: 100px
+    border-radius: 100px
+    box-shadow: $box-shadow
+
+    img
+        height: 100%
+        border-radius: 100px
+        object-fit: cover
+
+.dateRandomArtwork
+    font-family: $nunito-sans
+    font-size: $text
+    font-style: italic
+    line-height: $line-heights-texts-extra
+
+.titleRandomArtwork
+    font-size: $title-3
+    line-height: $line-heights-h3
+    color: $color-gray-texts
+    font-style: italic
+    font-weight: 700
+
+.figureRandomButton
+    width: 40px
+    height: 40px
+    padding: $ms
+    box-shadow: $box-shadow
+    border-radius: $brms
+
+//RECOMMENDED
+.descriptionRecommendedArtworksSection
+    text-align: center
+    margin-bottom: $gms
+
+.recommendedArtworksSection
+    margin: $mx 0
+    padding: 0 $ms
+
+.recommendedArtworksDiv
+    width: 100%
+    display: flex
+    flex-wrap: nowrap
+    box-shadow: $box-shadow
+    border-radius: $brmx
+
+.figuresRecommendedArtworks
+    display: flex
+    flex-direction: column
+    align-items: center
+    gap: $ms
+    width: 30%
+    border-top-left-radius: 32px
+    border-bottom-right-radius: 32px
+
+.selectedRecommendedArtwork
+    display: flex
+    flex-direction: column
+    align-items: center
+    width: 70%
+    border-radius: $brmx
+    border-bottom-left-radius: 0px
+
+    .figureWork
+        border-radius: $brmx
+        img
+            border-top-right-radius: $brmx
+
+.artworkCardHome
+    border-radius: $brmx
+
+.titleMessageSelectArtwork
+    margin-top: $gms
+
+.figureMessageSelectArtwork
+    width: 70%
+    max-width: 244px
+
+.messageSelectArtwork
+    padding: 0 $ms
+    font-size: $text
+    font-family: $nunito-sans
+    font-style: italic
+
+.readMoreDescription
+    display: block
+    margin: $ms 0
+    padding: $ms/2
+    width: max-content
+    font-style: italic
+    font-size: $text-extra
+    border-radius: $brms
+    box-shadow: $box-shadow
+
+.figureRecommendedArtwork
+    display: block
+    width: 100%
+    max-width: 120px
+    max-height: 120px
+    height: 30vw
+    padding: $gms
+    border-top-left-radius: 32px
+
+    img
+        width: 100%
+        height: 100%
+        object-fit: cover
+        border-radius: $brlms
+        box-shadow: $box-shadow
+
+.selected
+    border-top-left-radius: 32px
+    border-bottom-left-radius: 32px
+    box-shadow: $box-shadow
+
+//STORE
+
+.divMoreProducts
+    margin: 0 auto
+    display: flex
+    align-items: center
+    justify-content: center
+    width: 100%
+    padding: $lms
+    gap: $gms
+
+    p
+        font-family: $nunito-sans
+        font-size: $title-3
+        line-height: $line-heights-h3
+        color: $color-black
+        font-style: italic
+        font-weight: 700
+
+.figureMoreProducts
+    padding: $gms
+    width: 64px
+    background-color: $color-purple
+    border-radius: $brgms
+    box-shadow: $box-shadow-purple

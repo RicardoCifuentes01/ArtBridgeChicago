@@ -18,9 +18,11 @@ const cardArtist = () => {
             const template = document.createElement('template')
 
             const titleArtist = document.createElement('h1')
+            titleArtist.setAttribute('class', 'titleArtist')
             titleArtist.textContent = `${this.title}`
 
             const isArtistArtist = document.createElement('h2')
+            isArtistArtist.setAttribute('class', 'isArtistArtist')
             isArtistArtist.textContent = `${this.isArtist}`
 
             const ns = 'http://www.w3.org/2000/svg'
@@ -45,9 +47,11 @@ const cardArtist = () => {
             buttonLike.appendChild(svgLike)
 
             const lifeArtist = document.createElement('h3')
+            lifeArtist.setAttribute('class', 'lifeArtist')
             lifeArtist.textContent = `${this.birth} - ${this.death}`
 
             const descriptionArtist = document.createElement('p')
+            descriptionArtist.setAttribute('class', 'descriptionArtist')
             descriptionArtist.innerHTML = `${this.description}`
 
             template.content.append(titleArtist, isArtistArtist, buttonLike, lifeArtist, descriptionArtist)

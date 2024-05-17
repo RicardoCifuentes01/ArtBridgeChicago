@@ -1,0 +1,16 @@
+.productCard {
+  grid-template-rows: repeat(2, auto);
+  grid-template-columns: 130px 3fr;
+}
+.productCard h2 {
+  font-size: 24px;
+  line-height: 24px;
+}
+.productCard h3 {
+  font-size: 24px;
+}
+.productCard figure {
+  justify-self: end;
+  width: 130px;
+  height: 130px;
+}

@@ -1,7 +1,13 @@
 import deleteFavorites from "../utils/deleteFavorites.js"
+import styles from "../utils/styles.js"
 
 const favorites = (main) => {
 
+    //STYLES
+    styles('favorites')
+    main.className = 'mainFavorites'
+
+    //PRESENTATION
     const titleFavorites = document.createElement('h1')
     titleFavorites.textContent = 'Your favorites'
 
@@ -13,8 +19,10 @@ const favorites = (main) => {
 
     const categories = { 'Artworks': artworks, 'Artists': artists, 'Products': products }
 
-    const message = document.createElement('p')
-    message.textContent = 'You still don’t have any favorites 💔. Visit artworks 🖼️, artists 👩‍🎨 or the store 🛒.'
+    //MESSAGE
+    const messageFavorites = document.createElement('p')
+    messageFavorites.setAttribute('class', 'messageFavorites')
+    messageFavorites.textContent = 'You still don’t have any favorites 💔. Visit artworks 🖼️, artists 👩‍🎨 or the store 🛒.'
 
     if (localStorage.length != 0) {
         for (const key in localStorage) {
@@ -25,9 +33,10 @@ const favorites = (main) => {
             }
         }
     } else {
-        main.appendChild(message)
+        main.appendChild(messageFavorites)
     }
 
+    //SECTION FAVORITE
     const sectionFavorite = (title) => {
         const section = document.createElement('section')
         const sectionTitle = document.createElement('h2')
@@ -39,11 +48,13 @@ const favorites = (main) => {
         return section
     }
 
+    //FAVORITES
     const presentationFavorite = (key, favorite, section, category) => {
         const divFavorite = document.createElement('div')
 
-        if (favorite.image != '') {
+        if (favorite.image != '' && favorite.image != undefined) {
             const figureFavorite = document.createElement('figure')
+            figureFavorite.className = 'figureFavorite'
             const imgFavorite = document.createElement('img')
             imgFavorite.setAttribute('alt', favorite.title)
             imgFavorite.setAttribute('title', favorite.title)
@@ -64,28 +75,48 @@ const favorites = (main) => {
             location.hash = `${favorite.page}=${key}`
         })
 
-        const buttonDislike = document.createElement('figure')
+        //BUTTON DISLIKE
+        const ns = 'http://www.w3.org/2000/svg'
 
-        const imgDislike = document.createElement('img')
-        imgDislike.setAttribute('alt', 'buttonDislike')
-        imgDislike.setAttribute('title', 'buttonDislike')
-        buttonDislike.appendChild(imgDislike)
+        const buttonDislike = document.createElement('figure')
+        category[key].page == '#product' ? buttonDislike.classList.add('svgFillProduct') : buttonDislike.classList.add('svgFill')
+        buttonDislike.classList.add('buttonDislikeFavorites')
+
+        const svgDislike = document.createElementNS(ns, 'svg')
+        svgDislike.setAttribute('viewBox', '0 0 512 512')
+        svgDislike.setAttribute('width', '24')
+        svgDislike.setAttribute('height', '24')
+        svgDislike.setAttribute('title', 'Dislike')
+        svgDislike.setAttribute('alt', 'Dislike')
+        svgDislike.setAttribute('id', 'heart')
+
+        const pathDislike = document.createElementNS(ns, 'path')
+        pathDislike.setAttribute('id', 'pathHeart')
+        pathDislike.setAttribute('d', 'M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z')
+
+        svgDislike.appendChild(pathDislike)
+
+        buttonDislike.appendChild(svgDislike)
 
         buttonDislike.addEventListener('click', () => {
-            deleteFavorites(key)
-            const deleteDiv = buttonDislike.parentNode
-            deleteDiv.parentNode.removeChild(deleteDiv)
+            category[key].page == '#product' ? buttonDislike.classList.add('dislikeProduct') : buttonDislike.classList.add('dislike')
 
-            delete category[key]
+            setTimeout(() => {
+                category[key].page == '#product' ? buttonDislike.classList.remove('svgFillProduct') : buttonDislike.classList.remove('svgFill')
+                deleteFavorites(key)
+                const deleteDiv = buttonDislike.parentNode
+                deleteDiv.parentNode.removeChild(deleteDiv)
 
-            if (Object.keys(category).length == 0) {
-                main.removeChild(section)
-            }
+                delete category[key]
 
-            if (localStorage.length == 0) {
-                main.appendChild(message)
-            }
+                if (Object.keys(category).length == 0) {
+                    main.removeChild(section.parentNode)
+                }
 
+                if (localStorage.length == 0) {
+                    main.appendChild(messageFavorites)
+                }
+            }, 800)
         })
 
         divFavorite.append(titleFavorite, buttonDislike)
@@ -93,11 +124,15 @@ const favorites = (main) => {
 
     }
 
+    //SECTIONS
     for (const category in categories) {
         if (Object.keys(categories[category]).length != 0) {
             const section = sectionFavorite(category)
+            const divCategory = document.createElement('div')
+            divCategory.className = 'divCategory'
+            section.appendChild(divCategory)
             for (const key in categories[category]) {
-                presentationFavorite(key, categories[category][key], section, categories[category])
+                presentationFavorite(key, categories[category][key], divCategory, categories[category])
             }
         }
     }

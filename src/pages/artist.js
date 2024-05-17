@@ -1,10 +1,16 @@
 import { informationArtist } from "../utils/getArtist.js"
-import saveFavorites from "../utils/saveFavorites.js"
+import styles from "../utils/styles.js"
 import getHash from "../utils/getHash.js"
-import deleteFavorites from "../utils/deleteFavorites.js"
+import like from "../utils/like.js"
 
 const artist = async (main) => {
 
+    //STYLES
+    const ns = 'http://www.w3.org/2000/svg'
+    main.className = 'mainArtist'
+    styles('artist')
+
+    //FILTERED INFORMATION
     const filterArtist = async (information) => {
 
         const artist = await information
@@ -22,16 +28,31 @@ const artist = async (main) => {
 
     const filteredInformation = await filterArtist(informationArtist())
 
+    //CARD
     const cardArtist = document.createElement('card-artist')
+    cardArtist.setAttribute('class', 'cardArtist')
     cardArtist.title = `${filteredInformation.title}`
     cardArtist.isArtist = `${filteredInformation.isArtist}`
     cardArtist.birth = `${filteredInformation.birth}`
     cardArtist.death = `${filteredInformation.death}`
     cardArtist.description = `${filteredInformation.description}`
 
+    //ARTIST
+    const divArtworksSection = document.createElement('div')
+    divArtworksSection.setAttribute('class', 'divArtworksSection')
+
+    const titleDivArtworksSection = document.createElement('h2')
+    titleDivArtworksSection.innerText = 'Artworks'
+    titleDivArtworksSection.setAttribute('class', 'titleDivArtworksSection')
+
+    divArtworksSection.appendChild(titleDivArtworksSection)
+
+    //ARTWORKS
     const artworksArtistSection = document.createElement('section')
+    artworksArtistSection.setAttribute('class', 'artworksArtistSection')
 
     const artworksArtistNavSection = document.createElement('section')
+    artworksArtistNavSection.setAttribute('class', 'artworksArtistNavSection')
 
     const artworksArtistSectionContent = async (title, presentPage) => {
 
@@ -45,12 +66,16 @@ const artist = async (main) => {
             if (artwork.artist_title == filteredInformation.title) {
 
                 const artworkDiv = document.createElement('div')
+                artworkDiv.setAttribute('class', 'artworkDiv')
                 const artworkFigure = document.createElement('figure')
+                artworkFigure.setAttribute('class', 'artworkFigure')
                 const artworkImg = document.createElement('img')
+                artworkImg.setAttribute('class', 'artworkImg')
                 artwork.image_id == null || artwork.image_id == '' ? artworkImg.setAttribute('src', '') : artworkImg.setAttribute('src', `https://www.artic.edu/iiif/2/${artwork.image_id}/full/256,/0/default.jpg`)
 
 
                 const artworkTitle = document.createElement('h3')
+                artworkTitle.setAttribute('class', 'artworkTitle')
 
                 if (artwork.title != null || artwork.title != '') {
                     artworkImg.setAttribute('title', `${artwork.title}`)
@@ -63,6 +88,7 @@ const artist = async (main) => {
                 }
 
                 const artworkDate = document.createElement('p')
+                artworkDate.setAttribute('class', 'artworkDate')
 
                 artwork.date_display == null || artwork.date_display == '' ? artworkDate.textContent = 'Unknown' : artworkDate.textContent = `${artwork.date_display}`
 
@@ -78,11 +104,11 @@ const artist = async (main) => {
 
         }
 
+        //NAV
         const artworksArtistNavContent = (numberPages) => {
 
-
-
             const selectPage = document.createElement('select')
+            selectPage.setAttribute('title', 'Select artworks page')
 
             for (let index = 1; index <= numberPages; index++) {
                 const optionPage = document.createElement('option')
@@ -102,13 +128,28 @@ const artist = async (main) => {
 
             if (presentPage != 1) {
                 const previousPage = document.createElement('button')
-                previousPage.textContent = 'previous'
+                previousPage.setAttribute('class', 'buttonPrevious')
+                previousPage.setAttribute('type', 'button')
+                previousPage.setAttribute('title', 'Previous page')
 
                 const previousFigure = document.createElement('figure')
-                const previousImg = document.createElement('img')
-                previousFigure.appendChild(previousImg)
-                previousImg.setAttribute('alt', 'Previous page')
-                previousImg.setAttribute('title', 'Previous page')
+
+                const previousSvg = document.createElementNS(ns, 'svg')
+                previousSvg.setAttribute('viewBox', '0 0 80 100')
+                previousSvg.setAttribute('width', '19')
+                previousSvg.setAttribute('height', '19')
+                previousSvg.setAttribute('xmlns', 'http://www.w3.org/2000/svg')
+
+                const previousPath = document.createElementNS(ns, 'path')
+                previousPath.setAttribute('d', 'M10 50 L50 10 L90 50')
+                previousPath.setAttribute('stroke', '#64646C')
+                previousPath.setAttribute('fill', 'none')
+                previousPath.setAttribute('stroke-width', '10')
+
+                previousSvg.appendChild(previousPath)
+                previousFigure.appendChild(previousSvg)
+                previousPage.appendChild(previousFigure)
+
 
                 previousPage.addEventListener('click', function () {
                     presentPage = presentPage - 1
@@ -125,12 +166,28 @@ const artist = async (main) => {
 
             if (presentPage != numberPages) {
                 const nextPage = document.createElement('button')
-                nextPage.textContent = 'next'
+                nextPage.setAttribute('class', 'buttonNext')
+                nextPage.setAttribute('type', 'button')
+                nextPage.setAttribute('title', 'Next page')
+
                 const nextFigure = document.createElement('figure')
-                const nextImg = document.createElement('img')
-                nextFigure.appendChild(nextImg)
-                nextImg.setAttribute('alt', 'Next page')
-                nextImg.setAttribute('title', 'Next page')
+
+                const nextSvg = document.createElementNS(ns, 'svg')
+                nextSvg.setAttribute('viewBox', '0 0 50 100')
+                nextSvg.setAttribute('width', '19')
+                nextSvg.setAttribute('height', '19')
+                nextSvg.setAttribute('xmlns', 'http://www.w3.org/2000/svg')
+
+                const nextPath = document.createElementNS(ns, 'path')
+                nextPath.setAttribute('d', 'M10 10 L50 50 L10 90')
+                nextPath.setAttribute('stroke', '#64646C')
+                nextPath.setAttribute('fill', 'none')
+                nextPath.setAttribute('stroke-width', '10')
+
+                nextSvg.appendChild(nextPath)
+                nextFigure.appendChild(nextSvg)
+                nextPage.appendChild(nextFigure)
+
 
                 nextPage.addEventListener('click', function () {
                     presentPage = presentPage + 1
@@ -173,13 +230,16 @@ const artist = async (main) => {
 
     artworksArtistSectionContent(filteredInformation.title, 1)
 
-    main.append(cardArtist, artworksArtistSection, artworksArtistNavSection)
+    divArtworksSection.append(artworksArtistSection, artworksArtistNavSection)
+
+    main.append(cardArtist, divArtworksSection)
 
 
 
     //LIKE
 
     const buttonLike = await cardArtist.children[2]
+    buttonLike.classList.add('buttoLikeArtist')
 
     const page = getHash().page
     const id = getHash().id

@@ -15,6 +15,7 @@ const filterArtwork = async (information) => {
     if (artwork.sound_ids.length == 0) { filteredArtwork['sound'] = null } else { filteredArtwork['sound'] = await sound(artwork.sound_ids[0]) }
     artwork.artist_display == null ? filteredArtwork['author'] = 'Unknown' : filteredArtwork['author'] = artwork.artist_display
     artwork.artist_id == null ? filteredArtwork['artist_id'] = undefined : filteredArtwork['artist_id'] = artwork.artist_id
+    filteredArtwork['width'] = artwork.thumbnail.width
 
     return filteredArtwork
 }

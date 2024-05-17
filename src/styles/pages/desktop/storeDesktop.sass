@@ -1,0 +1,27 @@
+@import "../../components/variables"
+
+.productCard
+    grid-template-rows: repeat(3, auto)
+    grid-template-columns: 200px 3fr
+    grid-template-areas: "image title" "image description" "image price"
+    column-gap: $lms
+
+    p
+        display: inline
+        grid-area: description
+        font-family: $nunito-sans
+        font-size: $text
+
+    figure
+        width: 200px
+        height: 200px
+
+@media (min-width:1000px)
+    .productsCards
+        margin: 0 auto
+        width: 80%
+        padding: 0
+
+@media (min-width:1800px)
+    .productsCards
+        width: 60%

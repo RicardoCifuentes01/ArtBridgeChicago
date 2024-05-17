@@ -3,16 +3,14 @@ import saveFavorites from "../utils/saveFavorites.js"
 import getHash from "../utils/getHash.js"
 import deleteFavorites from "../utils/deleteFavorites.js"
 import styles from "../utils/styles.js"
-import zoomWork from "../utils/zoomWork.js"
-import zoomWorkStyles from "../utils/zoomWorkStyles.js"
-import closeZoom from "../utils/closeZoom.js"
 import viewWork from "../utils/viewWork.js"
 
 
 const product = async (main) => {
 
     //STYLES
-    styles('work').appendChild(await zoomWorkStyles())
+    styles('work')
+    main.className = 'mainProduct'
 
     //FILTERED INFORMATION
     const filterProduct = async (information) => {
@@ -92,20 +90,8 @@ const product = async (main) => {
 
     //ZOOM
     const figureWork = await cardProduct.children[0]
-
-    let statusZoom = false
-
-    figureWork.addEventListener('click', async () => {
-        if (!statusZoom) {
-
-            statusZoom = true
-
-            const figureCloseZoom = await zoomWork(filteredInformation.image, 'product', cardProduct, figureWork)
-
-            figureCloseZoom.addEventListener('click', async () => {
-                statusZoom = await closeZoom(filteredInformation.image, 'product', cardProduct, figureWork)
-            })
-        }
+    figureWork.addEventListener('click', () => {
+        window.location.href = filteredInformation.image
     })
 
 }

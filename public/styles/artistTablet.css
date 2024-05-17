@@ -1,0 +1,8 @@
+.artworksArtistSection {
+  padding: 16px;
+  display: grid;
+  -moz-column-gap: 5%;
+       column-gap: 5%;
+  row-gap: 5vw;
+  grid-template-columns: 30% 30% 30%;
+}
