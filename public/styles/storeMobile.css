@@ -1,3 +1,7 @@
+.mainStore {
+  padding: 16px 0 0;
+}
+
 .storeTitle {
   font-size: 32px;
   color: #B918F1;
@@ -61,16 +65,15 @@
 select {
   all: unset;
   display: inline-block;
-  width: -moz-min-content;
-  width: min-content;
+  width: 19px;
   text-align: center;
   padding: 16px;
-  order: 1;
   box-shadow: 4px 4px 5px #adaeb0, -4px -4px 5px #ffffff;
   border-radius: 8px;
   font-family: "Alexandria";
   font-size: 16px;
   color: #64646C;
+  order: 1;
 }
 
 .buttonNext, .buttonPrevious {
@@ -79,13 +82,14 @@ select {
   background-color: #E6E8EB;
   box-shadow: 4px 4px 5px #adaeb0, -4px -4px 5px #ffffff;
   border-radius: 8px;
+  cursor: pointer;
 }
 .buttonNext figure, .buttonPrevious figure {
   height: 19px;
 }
 
 .buttonNext {
-  order: 1;
+  order: 3;
 }
 
 .buttonPrevious figure {

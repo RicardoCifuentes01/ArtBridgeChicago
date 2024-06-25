@@ -26,7 +26,11 @@ ul
 
 img
     width: 100%
+    height: auto
     background-color: transparent
+
+img:not([src]), img[src=""]
+    visibility: hidden
 
 p
     line-height: $line-heights-h1-texts
@@ -34,9 +38,79 @@ p
 
 a
     text-decoration: none
+    -webkit-tap-highlight-color: transparent
+    /* Chrome, Safari, Android */
+    -webkit-focus-ring-color: transparent
+    /* Chrome, Safari */
+    outline: none
+    /* Firefox, Edge, IE */
 
 audio
     width: 100%
 
 h1, h2, h3
     font-family: $nunito-sans
+
+//LOADER
+.loadingScreen
+    display: grid
+    justify-content: center
+    align-items: center
+    position: fixed
+    top: 0
+    left: 0
+    z-index: 1
+    width: 100vw
+    height: 100vh
+    background-color: $color-gray-background
+    text-align: center
+    font-family: $nunito-sans
+    font-weight: 700
+    font-size: $title-1
+    color: $color-blue
+
+.containerLoader
+    width: 70px
+    height: 35px
+    overflow: hidden
+
+.loader
+    width: 70px
+    height: 70px
+    border-style: solid
+    border-top-color: #185EF1
+    border-right-color: #185EF1
+    border-left-color: transparent
+    border-bottom-color: transparent
+    border-radius: 50%
+    box-sizing: border-box
+    animation: rotate 1s ease-in-out infinite
+    transform: rotate(-200deg)
+
+@keyframes rotate
+    0%
+        border-width: 10px
+    25%
+        border-width: 3px
+    50%
+        transform: rotate(115deg)
+        border-width: 10px
+
+    75%
+        border-width: 3px
+    100%
+        border-width: 10px
+
+//LOADING IMAGE
+.loadingImage
+    animation: loadingImage infinite 1s
+
+.img--loadingImage
+    display: none
+
+@keyframes loadingImage
+    0%, 100%
+        opacity: 40%
+        background: $color-gray-texts
+    50%
+        opacity: 10%

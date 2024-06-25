@@ -3,7 +3,7 @@ h1, h2, h3, p {
 }
 
 .mainFavorites {
-  padding: 63px 16px 0;
+  padding: 16px 16px 0;
 }
 .mainFavorites h1 {
   text-align: center;
@@ -48,6 +48,7 @@ h1, h2, h3, p {
   width: 90px;
   height: 90px;
   cursor: pointer;
+  border-radius: 90px;
 }
 .divCategory div .figureFavorite img {
   width: 100%;

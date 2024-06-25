@@ -14,6 +14,10 @@
     width: 70%
     max-width: 244px
 
+    img
+        width: 100%
+        height: 100%
+
 .titleABC
     margin: 0 auto $gms
     width: min-content
@@ -73,6 +77,39 @@
     padding: $ms
     box-shadow: $box-shadow
     border-radius: $brms
+    cursor: pointer
+
+    img
+        width: 100%
+        height: 100%
+
+//LOADING SCREEN RANDOM
+.figureLoadingScreen
+    width: 100px
+    height: 100px
+    border-radius: 100px
+    background-color: $color-gray-texts
+    animation: loadingImage infinite 1s
+
+.dateLoadingScreen
+    width: 40%
+    height: $gms
+    border-radius: $brgms
+    background-color: $color-gray-texts
+    animation: loadingImage infinite 1s
+
+.titleLoadingScreen
+    width: 70%
+    height: $gms
+    border-radius: $brgms
+    background-color: $color-gray-texts
+    animation: loadingImage infinite 1s
+
+.randomButtonLoadingScreen
+    width: 40px
+    height: 40px
+    border-radius: $brms
+    animation: loadingImage infinite 1s
 
 //RECOMMENDED
 .descriptionRecommendedArtworksSection
@@ -113,6 +150,7 @@
             border-top-right-radius: $brmx
 
 .artworkCardHome
+    width: 100%
     border-radius: $brmx
 
 .titleMessageSelectArtwork
@@ -121,6 +159,10 @@
 .figureMessageSelectArtwork
     width: 70%
     max-width: 244px
+
+    img
+        width: 100%
+        height: 100%
 
 .messageSelectArtwork
     padding: 0 $ms
@@ -160,7 +202,6 @@
     box-shadow: $box-shadow
 
 //STORE
-
 .divMoreProducts
     margin: 0 auto
     display: flex
@@ -184,3 +225,8 @@
     background-color: $color-purple
     border-radius: $brgms
     box-shadow: $box-shadow-purple
+    cursor: pointer
+
+    img
+        width: 100%
+        height: 100%

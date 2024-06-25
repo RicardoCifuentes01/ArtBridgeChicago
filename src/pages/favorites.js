@@ -1,5 +1,6 @@
 import deleteFavorites from "../utils/deleteFavorites.js"
 import styles from "../utils/styles.js"
+import loadingImage from "../utils/loadingImage.js"
 
 const favorites = (main) => {
 
@@ -49,10 +50,22 @@ const favorites = (main) => {
     }
 
     //FAVORITES
-    const presentationFavorite = (key, favorite, section, category) => {
+    const presentationFavorite = async (key, favorite, section, category) => {
         const divFavorite = document.createElement('div')
 
         if (favorite.image != '' && favorite.image != undefined) {
+
+
+            if (category[key].page == '#artwork') {
+
+                const imageResolution = favorite.image.split('/')
+                imageResolution[7] = '256,'
+                const newImageResolution = imageResolution.join('/')
+
+                favorite.image = newImageResolution
+            }
+
+            console.log(favorite.image)
             const figureFavorite = document.createElement('figure')
             figureFavorite.className = 'figureFavorite'
             const imgFavorite = document.createElement('img')
@@ -66,6 +79,9 @@ const favorites = (main) => {
             figureFavorite.addEventListener('click', () => {
                 location.hash = `${favorite.page}=${key}`
             })
+
+            //LOADING
+            loadingImage(figureFavorite, imgFavorite)
         }
 
         const titleFavorite = document.createElement('h3')

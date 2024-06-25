@@ -1,5 +1,6 @@
 import { informationProduct } from "../utils/getProduct.js"
 import styles from "../utils/styles.js"
+import observer from "../utils/intersectionObserver.js"
 
 const store = async (main, preShop = false) => {
 
@@ -61,6 +62,7 @@ const store = async (main, preShop = false) => {
 
                 const filteredInformation = await filterProduct(article)
 
+                //CARD
                 const productCard = document.createElement('li')
                 productCard.setAttribute('class', 'productCard')
 
@@ -72,9 +74,19 @@ const store = async (main, preShop = false) => {
 
                 const figureProduct = document.createElement('figure')
                 const imageProduct = document.createElement('img')
-                imageProduct.setAttribute('src', filteredInformation.image)
+                imageProduct.setAttribute('data-img', filteredInformation.image)
+                imageProduct.setAttribute('title', filteredInformation.title)
+                imageProduct.setAttribute('alt', filteredInformation.title)
+                imageProduct.addEventListener('error', () => {
+                    imageProduct.setAttribute('src', '../src/assets/error/imageError.png')
+                    imageProduct.setAttribute('data-img', '../src/assets/error/imageError.png')
+                });
                 figureProduct.appendChild(imageProduct)
 
+                //OBSERVER
+                observer.observe(imageProduct, figureProduct)
+
+                //DESCRIPTION
                 const descriptionProduct = document.createElement('p')
                 descriptionProduct.innerHTML = filteredInformation.description
 
@@ -97,12 +109,12 @@ const store = async (main, preShop = false) => {
 
         await products()
 
-        //NAV
+        //NAV PAGE
         const storeNavSection = document.createElement('section')
         storeNavSection.setAttribute('class', 'storeNavSection')
 
         const selectPage = document.createElement('select')
-        selectPage.setAttribute('title', 'Select artworks page')
+        selectPage.setAttribute('title', 'Select products page')
 
         storeNavSection.appendChild(selectPage)
 
@@ -207,7 +219,7 @@ const store = async (main, preShop = false) => {
             const imgMoreProducts = document.createElement('img')
             imgMoreProducts.alt = 'More products from the store'
             imgMoreProducts.title = 'More products from the store'
-            imgMoreProducts.src = 'https://i.ibb.co/3fDmhDm/tienda.png'
+            imgMoreProducts.src = '../src/assets/home/storeHome.png'
             figureMoreProducts.appendChild(imgMoreProducts)
             divMoreProducts.append(textMoreProducts, figureMoreProducts)
             main.appendChild(divMoreProducts)

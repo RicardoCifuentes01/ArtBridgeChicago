@@ -80,7 +80,7 @@ const artist = async (main) => {
                 if (artwork.title != null || artwork.title != '') {
                     artworkImg.setAttribute('title', `${artwork.title}`)
                     artworkImg.setAttribute('alt', `${artwork.title}`)
-                    artworkTitle.textContent = `${artwork.title}`
+                    artwork.title.length > 30 ? artworkTitle.textContent = `${artwork.title.slice(0, 30)}...` : artworkTitle.textContent = artwork.title
                 } else {
                     artworkImg.setAttribute('title', 'Untitle')
                     artworkImg.setAttribute('alt', 'Untitle')
@@ -104,7 +104,7 @@ const artist = async (main) => {
 
         }
 
-        //NAV
+        //NAV PAGE
         const artworksArtistNavContent = (numberPages) => {
 
             const selectPage = document.createElement('select')
@@ -234,10 +234,7 @@ const artist = async (main) => {
 
     main.append(cardArtist, divArtworksSection)
 
-
-
     //LIKE
-
     const buttonLike = await cardArtist.children[2]
     buttonLike.classList.add('buttoLikeArtist')
 

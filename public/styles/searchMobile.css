@@ -4,7 +4,7 @@
   display: flex;
 }
 .searchSection input {
-  width: 90%;
+  width: 95%;
   padding: 4px 8px;
   color: #64646C;
   font-family: "Nunito Sans";
@@ -104,6 +104,11 @@
   color: #185EF1;
 }
 
+.termSearch::after {
+  content: "...";
+  color: #64646C;
+}
+
 .responseSection {
   padding: 16px 0 32px 32px;
 }
@@ -179,6 +184,7 @@
   margin: 0 auto;
   width: 100px;
   height: 100px;
+  border-radius: 100px;
 }
 
 .artworkImg {
@@ -205,4 +211,31 @@
   font-weight: 700;
   font-style: italic;
   font-family: "Nunito Sans";
+}
+
+.searchLoadingScreen {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+  gap: 32px;
+  width: 100%;
+  height: 100vh;
+  background-color: #E6E8EB;
+  font-family: "Alexandria";
+  font-size: 24px;
+  color: #64646C;
+}
+.searchLoadingScreen .searchingTerm {
+  color: #185EF1;
+}
+.searchLoadingScreen .containerLoader {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.searchLoadingScreen p {
+  text-align: center;
+  font-weight: 700;
 }

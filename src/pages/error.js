@@ -9,6 +9,7 @@ const error = (main) => {
 
     const page = getHash().page.slice(1)
 
+    //ERROR
     const titleError = document.createElement('h1')
     titleError.setAttribute('class', 'titleError')
     titleError.textContent = 'ERROR'
@@ -18,7 +19,7 @@ const error = (main) => {
     const imgError = document.createElement('img')
     imgError.title = `Error about the ${page} search`
     imgError.alt = `Error about the ${page} search`
-    imgError.src = 'https://i.ibb.co/DkXPWPS/7b29c676-311f-4a52-958a-92ea57e61dd9.jpg'
+    imgError.src = '../src/assets/error/pageError.png'
     figureError.appendChild(imgError)
 
     const descriptionError = document.createElement('p')

@@ -1,3 +1,7 @@
+.mainStore {
+  padding: 63px 0 0;
+}
+
 .productCard {
   grid-template-rows: repeat(2, auto);
   grid-template-columns: 130px 3fr;

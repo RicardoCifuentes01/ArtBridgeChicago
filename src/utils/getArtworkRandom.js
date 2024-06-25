@@ -1,18 +1,19 @@
-import randomId from "./randomId.js"
+import getAllArtworks from "./getAllArtworks.js"
 
-const getArtworkRandom = async (id) => {
+const getArtworkRandom = async () => {
     try {
-        const response = await fetch(`https://api.artic.edu/api/v1/artworks/${id}?fields=id,image_id,date_display,title`)
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
+        const informationGeneral = await getAllArtworks()
+        const pages = informationGeneral.pagination.total_pages
+        const artworks = informationGeneral.pagination.limit
+        const randomPage = Math.floor(Math.random() * (pages - 1) + 1)
+        const randomArtwork = Math.floor(Math.random() * (artworks - 1) + 1)
+        const response = await fetch(`https://api.artic.edu/api/v1/artworks?fields=id,image_id,date_display,title&page=${randomPage}`)
         const information = await response.json()
-        return information.data
+        const artwork = information.data[randomArtwork]
+        return artwork
     } catch (error) {
-        return await getArtworkRandom(randomId())
+        console.log(error)
     }
 }
 
-export const informationArtworkRandom = async () => {
-    return await getArtworkRandom(randomId())
-}
+export default getArtworkRandom

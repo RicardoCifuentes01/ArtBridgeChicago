@@ -1,3 +1,7 @@
+.mainFavorites {
+  padding: 63px 16px 0;
+}
+
 .divCategory {
   display: grid;
   -moz-column-gap: 5%;

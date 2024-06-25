@@ -1,4 +1,8 @@
 @import "../../components/variables"
+@import "../../components/navPage"
+
+.mainStore
+    padding: $gms 0 0
 
 .storeTitle
     font-size: $title-1
@@ -54,31 +58,19 @@
     gap: $gms
     justify-content: center
 
+//NAV PAGE
 select
-    all: unset
-    display: inline-block
-    width: min-content
-    text-align: center
-    padding: $gms
+    @include selectNavPage
     order: 1
-    box-shadow: $box-shadow
-    border-radius: $brms
-    font-family: $alexandria
-    font-size: $title-3
-    color: $color-gray-texts
 
 .buttonNext, .buttonPrevious
-    padding: $gms
-    border: none
-    background-color: $color-gray-background
-    box-shadow: $box-shadow
-    border-radius: $brms
+    @include buttonNextPrevious
 
     figure
         height: 19px
 
 .buttonNext
-    order: 1
+    order: 3
 
 .buttonPrevious
     figure

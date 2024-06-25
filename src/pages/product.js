@@ -4,6 +4,7 @@ import getHash from "../utils/getHash.js"
 import deleteFavorites from "../utils/deleteFavorites.js"
 import styles from "../utils/styles.js"
 import viewWork from "../utils/viewWork.js"
+import loadingImage from "../utils/loadingImage.js"
 
 
 const product = async (main) => {
@@ -94,6 +95,9 @@ const product = async (main) => {
         window.location.href = filteredInformation.image
     })
 
+    //LOADING IMAGE
+    const imageWork = figureWork.children[0]
+    loadingImage(figureWork, imageWork)
 }
 
 export default product

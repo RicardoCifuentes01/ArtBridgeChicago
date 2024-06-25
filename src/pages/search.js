@@ -2,8 +2,9 @@ import searchTerm from "../utils/searchTerm.js"
 import { informationArtist } from "../utils/getArtist.js"
 import { informationArtwork } from "../utils/getArtwork.js"
 import styles from "../utils/styles.js"
+import loadingImage from "../utils/loadingImage.js"
 
-const search = (main) => {
+const search = async (main) => {
 
     //STYLES
     styles('search')
@@ -19,9 +20,6 @@ const search = (main) => {
     const responseSection = document.createElement('section')
     responseSection.setAttribute('class', 'responseSection')
 
-    //ANIMATION STATE
-    let animationState = 1
-
     const [ignore, term] = location.hash.split('=')
 
     //RESPONSE
@@ -30,12 +28,11 @@ const search = (main) => {
 
         const data = await searchTerm(term)
 
-        animationState = false
         animationSection.innerHTML = ''
 
         const searchDescription = document.createElement('p')
         searchDescription.setAttribute('class', 'messageSearch')
-        location.hash.includes('=') ? searchDescription.innerHTML = `Results related to <span class="termSearch">${term.replace('%20', ' ')}<span>...` : searchDescription.textContent = `Results related to ${term}...`
+        location.hash.includes('=') ? searchDescription.innerHTML = `Results related to <span class="termSearch">${decodeURI(term)}<span>` : searchDescription.textContent = `Results related to ${term}...`
 
         //ARTISTS
         const responseArtists = document.createElement('div')
@@ -113,15 +110,17 @@ const search = (main) => {
                 artworkInformation.date_display == null || artworkInformation.date_display == '' ? artworkDate.textContent = 'Unknown' : artworkDate.textContent = artworkInformation.date_display
                 const artworkTitle = document.createElement('h2')
                 artworkTitle.setAttribute('class', 'artworkTitle')
-                artworkInformation.title == null || artworkInformation.title == '' ? artworkInformation.title = 'Untitle' : artworkTitle.textContent = artworkInformation.title
+                artworkInformation.title == null || artworkInformation.title == '' ? artworkInformation.title = 'Untitle' : artworkInformation.title.length > 30 ? artworkTitle.textContent = `${artworkInformation.title.slice(0, 30)}...` : artworkTitle.textContent = artworkInformation.title
                 const artworkFigure = document.createElement('figure')
                 const artworkImg = document.createElement('img')
                 artworkImg.setAttribute('class', 'artworkImg')
                 artworkFigure.setAttribute('class', 'artworkFigure')
-                if (artworkInformation.image_id != null || artworkInformation.image_id != undefined) { artworkImg.setAttribute('src', `https://www.artic.edu/iiif/2/${artworkInformation.image_id}/full/256,/0/default.jpg`) }
+                if (artworkInformation.image_id != null || artworkInformation.image_id != undefined) { artworkImg.setAttribute('src', `https://www.artic.edu/iiif/2/${artworkInformation.image_id}/full/256,/0/default.jpg`) } else { artworkImg.setAttribute('src', '../src/assets/error/imageError.png') }
                 artworkFigure.appendChild(artworkImg)
                 artworkCard.append(artworkFigure, artworkDate, artworkTitle)
                 artworksCards.appendChild(artworkCard)
+
+                loadingImage(artworkFigure, artworkImg)
 
                 artworkCard.addEventListener('click', () => {
                     location.hash = `#artwork=${artworkInformation.id}`
@@ -135,18 +134,67 @@ const search = (main) => {
             responseArtworks.appendChild(noArtworksResults)
         }
 
-
-
         responseSection.append(searchDescription, responseArtists, responseArtworks)
+
+        const searchLoadingScreen = document.getElementById('searchLoadingScreen')
+        searchLoadingScreen.remove()
     }
 
+    //SEARCH
+    const searchSectionContent = () => {
+
+        const searchField = document.createElement('input')
+        searchField.setAttribute('type', 'text')
+        searchField.setAttribute('placeholder', 'Search...')
+
+        const searchButton = document.createElement('button')
+        const searchFigure = document.createElement('figure')
+        const searchImg = document.createElement('img')
+        searchImg.setAttribute('alt', 'search')
+        searchImg.setAttribute('title', 'search')
+        searchImg.setAttribute('src', '../src/assets/search/searchSearch.png')
+        searchFigure.appendChild(searchImg)
+        searchButton.appendChild(searchFigure)
+
+        searchButton.addEventListener('click', async (event) => {
+            searchField.value != '' && searchField.value != ' ' && searchField.value != '%20' ? location.hash = `#search=${searchField.value}` : event.preventDefault()
+        })
+
+        searchSection.append(searchField, searchButton)
+    }
+
+    searchSectionContent()
+
+    main.appendChild(searchSection)
+
+    //LOADER
     if (location.hash.includes('=')) {
+
+        const searchLoadingScreen = document.createElement('div')
+        searchLoadingScreen.setAttribute('class', 'searchLoadingScreen')
+        searchLoadingScreen.setAttribute('id', 'searchLoadingScreen')
+
+        const containerLoader = document.createElement('div')
+        containerLoader.setAttribute('class', 'containerLoader')
+        searchLoadingScreen.appendChild(containerLoader)
+
+        const loader = document.createElement('div')
+        loader.setAttribute('class', 'loader')
+        containerLoader.appendChild(loader)
+
+        const searchingMessage = document.createElement('p')
+        searchingMessage.innerHTML = `<p>Searching for <span class="searchingTerm">"${decodeURI(term)}"</span>...</p>`
+        searchLoadingScreen.appendChild(searchingMessage)
+
+        main.appendChild(searchLoadingScreen)
+
         responseSectionContent(term)
     }
 
-
     //ANIMATION SECTION
     const animationSectionContent = () => {
+
+        let animationState = 1
 
         const searches = { artist: ['artist', 'url'], artwork: ['artwork', 'url'] }
 
@@ -181,11 +229,11 @@ const search = (main) => {
 
             switch (animationState) {
                 case 1:
-                    animation(searches['artist'][0], 'https://i.ibb.co/XknQ4HK/photo-2023-08-10-17-01-38.png')
+                    animation(searches['artist'][0], '../src/assets/search/artist.png')
                     animationState = 0
                     break;
                 case 0:
-                    animation(searches['artwork'][0], 'https://i.ibb.co/FXnvBb0/photo-2023-08-10-15-50-41.png')
+                    animation(searches['artwork'][0], '../src/assets/search/artwork.png')
                     animationState = 1
                     break;
 
@@ -196,37 +244,11 @@ const search = (main) => {
 
     }
 
-    animationSectionContent()
-
-    //SEARCH
-    const searchSectionContent = () => {
-
-        const searchField = document.createElement('input')
-        searchField.setAttribute('type', 'text')
-        searchField.setAttribute('placeholder', 'Search...')
-
-        const searchButton = document.createElement('button')
-        const searchFigure = document.createElement('figure')
-        const searchImg = document.createElement('img')
-        searchImg.setAttribute('alt', 'search')
-        searchImg.setAttribute('title', 'search')
-        searchImg.setAttribute('src', 'https://i.ibb.co/3MZ5TTN/buscar-4.png')
-        searchFigure.appendChild(searchImg)
-        searchButton.appendChild(searchFigure)
-
-        searchButton.addEventListener('click', async (event) => {
-            searchField.value != '' && searchField.value != ' ' && searchField.value != '%20' ? location.hash = `#search=${searchField.value}` : event.preventDefault()
-        })
-
-        searchSection.append(searchField, searchButton)
+    if (!location.hash.includes('=')) {
+        animationSectionContent()
     }
 
-    searchSectionContent()
-
-
-
-    main.append(searchSection, animationSection, responseSection)
-
+    main.append(animationSection, responseSection)
 
 }
 

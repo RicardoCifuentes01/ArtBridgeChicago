@@ -1,8 +1,11 @@
-import { informationArtworkRandom } from "../utils/getArtworkRandom.js"
+import getArtworkRandom from "../utils/getArtworkRandom.js"
+import getAllArtworks from "../utils/getAllArtworks.js"
 import { informationArtwork } from "../utils/getArtwork.js"
 import artwork from "./artwork.js"
 import store from "./store.js"
 import styles from "../utils/styles.js"
+import observer from "../utils/intersectionObserver.js"
+import loadingImage from "../utils/loadingImage.js"
 
 const home = async (main) => {
     //STYLES
@@ -19,7 +22,9 @@ const home = async (main) => {
         const imgABC = document.createElement('img')
         imgABC.title = 'Art Bridge Chicago'
         imgABC.alt = 'Presentation image of Art Bridge Chicago.'
-        imgABC.src = 'https://i.ibb.co/SyPjg1q/OIG-removebg-preview.png'
+        imgABC.src = '../src/assets/home/presentation.jpg'
+        imgABC.loading = null
+        imgABC.setAttribute('fetchpriority', 'high')
         figureABC.appendChild(imgABC)
 
         const titleABC = document.createElement('h1')
@@ -30,6 +35,7 @@ const home = async (main) => {
         descriptionABC.setAttribute('class', 'descriptionABC')
         descriptionABC.textContent = '“Art Bidge Chicago” offers a unique experience for art lovers by consuming data from the API of the “Institute Art Chicago”. You can consult information about artists and their works, as well as explore exclusive products from the store. We invite you to explore everything we have to offer!'
 
+        presentationSeciton.append(titleABC, descriptionABC)
         presentationSeciton.append(figureABC, titleABC, descriptionABC)
 
         return presentationSeciton
@@ -43,6 +49,7 @@ const home = async (main) => {
         titleRandomWorksSection.setAttribute('class', 'titleRandomWorksSection')
         titleRandomWorksSection.textContent = 'Random artwork'
 
+        //FILTERED INFORMATION
         const filterArtwork = async (information) => {
 
             const artwork = await information
@@ -56,7 +63,7 @@ const home = async (main) => {
             return filteredArtwork
         }
 
-        let filteredInformation = await filterArtwork(informationArtworkRandom())
+        let filteredInformation = await filterArtwork(getArtworkRandom())
 
         const elementsRandomWorksSection = (filteredInformation) => {
 
@@ -65,16 +72,20 @@ const home = async (main) => {
             const figureRandomArtwork = document.createElement('figure')
             figureRandomArtwork.setAttribute('class', 'figureRandomArtwork')
             const imgRandomArtwork = document.createElement('img')
-            filteredInformation.image != null ? imgRandomArtwork.src = `https://www.artic.edu/iiif/2/${filteredInformation.image}/full/256,/0/default.jpg` : imgRandomArtwork.src = 'https://i.ibb.co/DtyPY1N/Group-24.png'
+            filteredInformation.image != null ? imgRandomArtwork.src = `https://www.artic.edu/iiif/2/${filteredInformation.image}/full/256,/0/default.jpg` : imgRandomArtwork.src = '../src/assets/error/imageError.png'
             imgRandomArtwork.alt = filteredInformation.title
             imgRandomArtwork.title = filteredInformation.title
             figureRandomArtwork.appendChild(imgRandomArtwork)
+
+            //LOADING IMAGE
+            loadingImage(figureRandomArtwork, imgRandomArtwork)
 
             figureRandomArtwork.addEventListener('click', () => {
                 location.hash = `#artwork=${filteredInformation.id}`
                 informationArtwork()
             })
 
+            //CARD RANDOM ARTWORK
             const dateRandomArtwork = document.createElement('p')
             dateRandomArtwork.setAttribute('class', 'dateRandomArtwork')
             dateRandomArtwork.textContent = filteredInformation.year
@@ -88,11 +99,29 @@ const home = async (main) => {
             const imgRandomButton = document.createElement('img')
             imgRandomButton.alt = 'Random button'
             imgRandomButton.title = 'Random button'
-            imgRandomButton.src = 'https://i.ibb.co/gWbRdtK/flecha-de-carga.png'
+            imgRandomButton.src = '../src/assets/home/reload.png'
             figureRandomButton.appendChild(imgRandomButton)
 
+            //RELOAD
             figureRandomButton.addEventListener('click', async () => {
-                filteredInformation = await filterArtwork(informationArtworkRandom())
+
+                const figureLoadingScreen = document.createElement('div')
+                figureLoadingScreen.setAttribute('class', 'figureLoadingScreen')
+                const dateLoadingScreen = document.createElement('div')
+                dateLoadingScreen.setAttribute('class', 'dateLoadingScreen')
+                const titleLoadingScreen = document.createElement('div')
+                titleLoadingScreen.setAttribute('class', 'titleLoadingScreen')
+                const randomButtonLoadingScreen = document.createElement('div')
+                randomButtonLoadingScreen.setAttribute('class', 'randomButtonLoadingScreen')
+
+                figureRandomArtwork.remove()
+                dateRandomArtwork.remove()
+                titleRandomArtwork.remove()
+                figureRandomButton.remove()
+
+                randomWorkSection.append(figureLoadingScreen, dateLoadingScreen, titleLoadingScreen, randomButtonLoadingScreen)
+
+                filteredInformation = await filterArtwork(getArtworkRandom())
                 elementsRandomWorksSection(filteredInformation)
             })
 
@@ -112,6 +141,7 @@ const home = async (main) => {
     //RECOMMENDED
     const recommended = async () => {
 
+        //RECOMMENDED ARTWORKS
         const recommendedArtworksSection = document.createElement('section')
         recommendedArtworksSection.setAttribute('class', 'recommendedArtworksSection')
 
@@ -155,17 +185,8 @@ const home = async (main) => {
 
         recommendedArtworksSection.append(titleRecommendedArtworksSection, descriptionRecommendedArtworksSection, recommendedArtworksDiv)
 
-        const recommendedArtworks = async () => {
-            try {
-                const response = await fetch(`https://api.artic.edu/api/v1/artworks?fields=id,image_id,title`)
-                const information = await response.json()
-                return information.data
-            } catch (error) {
-                console.log(error)
-            }
-        }
-
-        const listArtworks = await recommendedArtworks()
+        //ARTWORKS
+        const listArtworks = (await getAllArtworks()).data
 
         const cardArtwork = (id) => {
             const information = informationArtwork(id)
@@ -175,15 +196,25 @@ const home = async (main) => {
         }
 
         for (const work of listArtworks) {
-            const figureRecommendedArtwork = document.createElement('figure')
+            const figureRecommendedArtwork = document.createElement('li')
             figureRecommendedArtwork.setAttribute('class', 'figureRecommendedArtwork')
             const imgRecommendedArtwork = document.createElement('img')
             imgRecommendedArtwork.setAttribute('alt', work.title)
             imgRecommendedArtwork.setAttribute('title', work.title)
-            work.image_id != null ? imgRecommendedArtwork.setAttribute('src', `https://www.artic.edu/iiif/2/${work.image_id}/full/1200,/0/default.jpg`) : imgRecommendedArtwork.setAttribute('src', 'https://i.ibb.co/DtyPY1N/Group-24.png')
+            imgRecommendedArtwork.onerror = function () {
+                this.setAttribute('src', '../src/assets/error/imageError.png')
+                this.setAttribute('data-img', '../src/assets/error/imageError.png')
+                console.log(`${work.title} not found`)
+            }
+            work.image_id != null ? imgRecommendedArtwork.setAttribute('data-img', `https://www.artic.edu/iiif/2/${work.image_id}/full/256,/0/default.jpg`) : imgRecommendedArtwork.setAttribute('data-img', '../src/assets/error/imageError.png')
+
+            //INTERSECTION OBSERVER
+            observer.observe(imgRecommendedArtwork)
+
             figureRecommendedArtwork.appendChild(imgRecommendedArtwork)
             figuresRecommendedArtworks.appendChild(figureRecommendedArtwork)
 
+            //CARD ARTWORK
             if (work.image_id != null) {
                 figureRecommendedArtwork.addEventListener('click', () => {
 
@@ -196,6 +227,17 @@ const home = async (main) => {
                     figureRecommendedArtwork.className = 'figureRecommendedArtwork selected'
                     selectedRecommendedArtwork.innerHTML = ``
                     cardArtwork(work.id)
+
+                    //SCREEN RELOCATION
+                    const coordinates = recommendedArtworksSection.getBoundingClientRect();
+
+                    const distanceFromStart = coordinates.top + window.scrollY;
+
+                    window.scrollTo({
+                        top: distanceFromStart - 40,
+                        behavior: 'smooth'
+                    });
+
                 })
             }
         }
@@ -213,6 +255,7 @@ const home = async (main) => {
     }
 
     main.append(presentationRandomDiv, await recommended(), await preShop())
+
 }
 
 export default home

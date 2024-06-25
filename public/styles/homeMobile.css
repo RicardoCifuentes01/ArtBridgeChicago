@@ -12,6 +12,10 @@
   width: 70%;
   max-width: 244px;
 }
+.figureABC img {
+  width: 100%;
+  height: 100%;
+}
 
 .titleABC {
   margin: 0 auto 16px;
@@ -80,6 +84,42 @@
   padding: 8px;
   box-shadow: 4px 4px 5px #adaeb0, -4px -4px 5px #ffffff;
   border-radius: 8px;
+  cursor: pointer;
+}
+.figureRandomButton img {
+  width: 100%;
+  height: 100%;
+}
+
+.figureLoadingScreen {
+  width: 100px;
+  height: 100px;
+  border-radius: 100px;
+  background-color: #64646C;
+  animation: loadingImage infinite 1s;
+}
+
+.dateLoadingScreen {
+  width: 40%;
+  height: 16px;
+  border-radius: 12px;
+  background-color: #64646C;
+  animation: loadingImage infinite 1s;
+}
+
+.titleLoadingScreen {
+  width: 70%;
+  height: 16px;
+  border-radius: 12px;
+  background-color: #64646C;
+  animation: loadingImage infinite 1s;
+}
+
+.randomButtonLoadingScreen {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  animation: loadingImage infinite 1s;
 }
 
 .descriptionRecommendedArtworksSection {
@@ -126,6 +166,7 @@
 }
 
 .artworkCardHome {
+  width: 100%;
   border-radius: 32px;
 }
 
@@ -136,6 +177,10 @@
 .figureMessageSelectArtwork {
   width: 70%;
   max-width: 244px;
+}
+.figureMessageSelectArtwork img {
+  width: 100%;
+  height: 100%;
 }
 
 .messageSelectArtwork {
@@ -205,4 +250,9 @@
   background-color: #B918F1;
   border-radius: 12px;
   box-shadow: 4px 4px 5px #B918F1, -4px -4px 5px #ffffff;
+  cursor: pointer;
+}
+.figureMoreProducts img {
+  width: 100%;
+  height: 100%;
 }

@@ -58,4 +58,7 @@
   max-width: 90px;
   max-height: 90px;
   flex-shrink: 0;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 32px;
+  border-bottom-right-radius: 32px;
 }

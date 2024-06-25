@@ -15,7 +15,7 @@
   flex-shrink: 0;
 }
 
-.figureRandomArtwork {
+.figureRandomArtwork, .figureLoadingScreen {
   width: 150px;
   height: 150px;
 }

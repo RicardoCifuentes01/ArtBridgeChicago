@@ -5,7 +5,7 @@ import { informationArtist } from "../utils/getArtist.js"
 import styles from "../utils/styles.js"
 import viewWork from "../utils/viewWork.js"
 import like from "../utils/like.js"
-
+import loadingImage from "../utils/loadingImage.js"
 
 const artwork = async (main, defaultArtwork = undefined) => {
 
@@ -14,7 +14,6 @@ const artwork = async (main, defaultArtwork = undefined) => {
     if (defaultArtwork == undefined) {
         main.className = 'mainArtwork'
     }
-
 
     //FILTERED INFORMATION
     let filteredInformation = undefined
@@ -51,10 +50,6 @@ const artwork = async (main, defaultArtwork = undefined) => {
         informationArtist()
     })
 
-
-    //VIEW WORK
-    await viewWork(filteredInformation.image, 'artwork')
-
     //ZOOM
     const figureWork = await cardArtwork.children[0]
     figureWork.addEventListener('click', () => {
@@ -88,9 +83,14 @@ const artwork = async (main, defaultArtwork = undefined) => {
         }
 
         readMoreDescription.addEventListener('click', readMore)
-
-
     }
+
+    //LOADING IMAGE
+    const imageWork = figureWork.children[0]
+    await loadingImage(figureWork, imageWork)
+
+    //VIEW WORK
+    viewWork(filteredInformation.image, 'artwork')
 
     return main
 }

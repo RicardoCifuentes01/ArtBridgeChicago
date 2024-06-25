@@ -21,7 +21,8 @@ cardProduct()
 
 const routes = { '': home, 'artwork': artwork, 'artist': artist, 'store': store, 'product': product, 'favorites': favorites, 'search': search }
 
-export const router = () => {
+export const router = async () => {
+
     const headerElement = document.querySelector('header')
     headerElement.innerHTML = ''
     header(headerElement)
@@ -38,7 +39,20 @@ export const router = () => {
     footer(footerElement)
 
     const hash = getHash().page
+    const id = getHash().id
     const resolve = resolveRoutes(hash)
-    const render = routes[resolve] ? routes[resolve] : error
-    render(mainElement)
+
+    const render = routes[resolve] && id != 'undefined' ? routes[resolve] : error
+    await render(mainElement)
+
+    setTimeout(() => {
+        const loadingScreen = document.getElementById('loadingScreen')
+        loadingScreen.style.display = 'none'
+        window.scrollTo(0, 0)
+    }, 1300)
+
+
+
+
+
 }
